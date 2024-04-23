@@ -1,1 +1,40 @@
-<p>login works!</p>
+<div class="div-extra">
+    <form class="form-login" [formGroup]="login" >
+
+        <span class="form-span">Login</span>
+
+
+        <div class="container-label-input">
+            <label for="emailInput">Email</label>
+            <input type="text" name="emailInput" formControlName="email" >
+            <!-- <input type="text" name="emailInput" formControlName="email"> -->
+            <!-- <span>{{getErrorsForms('email')}}</span> -->
+            <!-- <div @if="emailControl.invalid && emailControl.touched">
+                <div *ngIf="emailControl.errors?.required">El correo electrónico es obligatorio.</div>
+                <div *ngIf="emailControl.errors?.email">El correo electrónico no es válido.</div>
+              </div> -->
+
+
+              @if (login.invalid && login.touched ) {
+
+                @if(login.get('email')?.invalid){
+                    <p>flñasjdlkfsd</p>
+                  
+                    
+                }
+
+                }
+            
+              
+        </div>
+    
+    
+        <div class="container-label-input">
+            <label for="passwordInput">Password</label>
+        <input type="password" name="passwordInput" formControlName="password">
+        </div>
+    
+        <button (click)="signIn()">Login</button>
+    
+    </form>
+</div>
