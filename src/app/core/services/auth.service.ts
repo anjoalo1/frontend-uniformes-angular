@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { authAdmin } from '../dto/authDto';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenDto } from '../dto/tokenDto';
+import { TokenService } from './token/token.service';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
   url:string="http://localhost:8086/auth/sign-in"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) { }
 
 
  /*  public login(authDto: authAdmin): Subscription{
@@ -32,7 +33,14 @@ export class AuthService {
 
   public login(authDto: authAdmin): Observable<TokenDto>{
 
-     return this.http.post<TokenDto>(this.url, authDto);
+     return this.http.post<TokenDto>(this.url, authDto).pipe(
+
+      tap(response=>{
+        this.tokenService.saveToken(response.token);
+      }
+
+      )
+     )
 
   }
 

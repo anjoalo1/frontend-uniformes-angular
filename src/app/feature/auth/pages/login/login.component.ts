@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AppBaseComponent } from '../../../../core/utils/AppBaseComponent';
 import { AuthService } from '../../../../core/services/auth.service';
 import { authAdmin } from '../../../../core/dto/authDto';
-import { HttpClientModule } from '@angular/common/http';
+import { AppBaseComponent } from '../../../../core/utils/AppBaseComponent';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, ReactiveFormsModule],
   providers:[AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-
 export class LoginComponent extends AppBaseComponent{
-
 
   public login: FormGroup;
 
@@ -61,11 +59,11 @@ export class LoginComponent extends AppBaseComponent{
     return message;
   }
 
-  sedLogin(form: FormGroup): void{
+  sedLogin  (form: FormGroup): void{
     console.log(form.value);
   }
 
-  public signIn():void{
+  public async signIn(): Promise<void>{
     
     let email = this.login.get('email')?.value;
     let password = this.login.get('password')?.value;
@@ -75,15 +73,10 @@ export class LoginComponent extends AppBaseComponent{
       "password":password
     }
 
-    this.authservice.login(dtoLogin).subscribe(
-      value=>{
-        console.log(value);
-      }
-    )
+    await lastValueFrom(this.authservice.login(dtoLogin));
 
-   
+   console.log(localStorage.getItem("token"));
+
   }
-
- 
 
 }
