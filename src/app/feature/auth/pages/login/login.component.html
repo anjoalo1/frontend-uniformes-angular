@@ -34,6 +34,7 @@
             <label for="passwordInput">Password</label>
         <input type="password" name="passwordInput" formControlName="password">
         </div>
+        <div class="container-label-input"><p>{{error.error.ERROR}}</p></div>
     
         <button (click)="signIn()">Login</button>
     

@@ -1,0 +1,100 @@
+
+.container-main{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.products{
+    display: flex;
+    flex-flow: column wrap;
+  /*   justify-content: start; */
+    align-content: center;
+    gap: 5px;
+    /*  border: 1px solid black; */
+    position: relative;
+    margin: 15px;
+    border-radius: 5px;
+    min-width: 150px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.header-card{
+    position: absolute;
+    background-color: rgb(96, 42, 117);
+    height: 50px;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.first-element{
+    margin-top: 55px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+
+}
+
+.title-card{
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+.description-card{
+ color: grey;
+}
+
+.content-main{
+    margin: 70px 0 10px 0;
+}
+
+.content-main>p{
+    margin-top: 10px;
+}
+
+.footer-card-item{
+    display: inline;
+    margin: 0 5px 10px 0;
+}
+
+.red{
+    font-size: 1.5rem;
+    color: rgb(222, 79, 13);
+}
+
+.container-row{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 80vw;
+    box-shadow: 5px 5px 5px rgba(207, 201, 201, 0.5);
+  }
+  
+  tr th{
+    background-color: rgb(126, 126, 140);
+  }
+  
+  th, td {
+    border: 1px solid rgb(252, 248, 248);
+    padding: 8px 2px;
+  }
+  
+  
+  tr:nth-child(2n+1) {
+    background-color: rgb(85, 80, 80); /* Cambia el color de fondo según tus preferencias */
+  }
+

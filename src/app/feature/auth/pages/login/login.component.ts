@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/auth.service';
 import { authAdmin } from '../../../../core/dto/authDto';
 import { AppBaseComponent } from '../../../../core/utils/AppBaseComponent';
 import { lastValueFrom } from 'rxjs';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -13,12 +15,13 @@ import { lastValueFrom } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent extends AppBaseComponent{
+export default class LoginComponent extends AppBaseComponent{
 
   public login: FormGroup;
+  public error: any="";
 
 
-  constructor (private fb: FormBuilder, private authservice: AuthService){
+  constructor (private fb: FormBuilder, private authservice: AuthService, private router:Router){
     super();
 
     this.login = this.fb.group({
@@ -73,9 +76,21 @@ export class LoginComponent extends AppBaseComponent{
       "password":password
     }
 
-    await lastValueFrom(this.authservice.login(dtoLogin));
-
-   console.log(localStorage.getItem("token"));
+    
+    try{
+      
+      await lastValueFrom(this.authservice.login(dtoLogin));
+    
+     console.log(localStorage.getItem("token"));
+     await this.router.navigateByUrl("/catalogue");
+     this.error="";
+    }catch (error){
+      console.error('Error durante el inicio de sesión:', error);
+      this.error=error;
+      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje al usuario
+    
+      
+    }
 
   }
 

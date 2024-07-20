@@ -1,0 +1,95 @@
+<p>catalogue works!</p>
+
+@if (shoppingNow==false) {
+
+    <div class="container-main">
+        
+        
+        @for (item of myProducts; track item.id; let idx = $index) {
+            
+            <div class="products">
+                <span class="header-card">
+                </span>
+                <div class="content-main">
+                    <p class="title-card">{{item.nameProduct}}</p>
+                    <p class="description-card">{{item.description}}</p>
+                    <p>Type:{{item.type}}</p>
+                </div>
+                <div class="footer-card">
+                    <p class="footer-card-item">Price:{{item.price}}</p>
+                    <p class="footer-card-item red">Size:{{item.size}}</p>
+                </div>
+                <p class="footer-card-item red">Cantidad: {{item.cantidad}}</p>
+                
+                <div>
+                    <button (click)="increment(1, item.id, idx)">+</button>
+                    <button (click)="decrement(1, item.id, idx)">-</button>
+                </div>
+                <div>
+                    <button (click)="addCartBuy(item.id, item.cantidad)">Add Product</button>
+                </div>
+            </div>
+        }
+        
+        
+</div>
+
+
+}
+
+
+
+<div class="container-main">
+        @if (this.carShopt.length >=1) {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tipo P</th>
+                        <th>size</th>
+                        <th>Prec Unt</th>
+                        <th>Cantidad</th>
+                        <th>Precio T</th>
+                        <!-- <th>Ad</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @for (item of carShopt; track item.id; let id = $index) {
+                        
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.size}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.cantidad}}
+                            <button (click)="incremenetShopinCart(id)">+</button>
+                            <button (click)="decrementShopinCart(id)">-</button>
+                            </td>
+                            <td>{{item.total}}</td>
+                            
+                        </tr>
+                        
+                    }@empty {
+                        
+                    }
+                    
+                    
+                    
+                </tbody>
+            </table>
+        }
+        
+           <!--  <div >
+                <h2 class="title-h2">Total: $ <span></span></h2>
+            </div> -->
+</div>
+<button (click)="sendShoppingNow()">shopping now</button>
+@if(shoppingNow){
+
+    <div>
+        <h2>{{Total}}</h2>
+    </div>
+}
+
+<button (click)="generateBill()">generate bill</button>

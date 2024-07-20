@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { getCookie, setCookie } from 'typescript-cookie'
 
 @Injectable({
@@ -20,10 +21,21 @@ export class TokenService {
     const token = getCookie("token");
     if (token === undefined) {
         // Manejar el caso en el que la cookie no está presente
-        throw new Error("Token no encontrado en las cookies.");
+        const miValor:string= "false"
+        return miValor;
     }
     return token;
     
+  }
+
+
+  public validateToken(): Observable<boolean>{
+    const token = getCookie("token");
+    if(token==undefined || token == null){
+      return of(false);
+    }else{
+      return of(true);
+    }
   }
 
   public deleteToken():void{

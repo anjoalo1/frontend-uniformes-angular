@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { authAdmin } from '../dto/authDto';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subscription, catchError, tap } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenDto } from '../dto/tokenDto';
 import { TokenService } from './token/token.service';
@@ -37,9 +37,11 @@ export class AuthService {
 
       tap(response=>{
         this.tokenService.saveToken(response.token);
-      }
-
-      )
+      }),
+      catchError(error => {
+        console.error('Error en la autenticación:', error);
+        throw error; // Re-lanzar el error para que el suscriptor también pueda manejarlo
+      })
      )
 
   }
