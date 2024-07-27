@@ -1,0 +1,85 @@
+<p>findperson works!</p>
+
+<div>
+    <p>Buscar cliente?</p>
+    <label>
+      <input [(ngModel)]="selectOption" type="radio" name="color" value="true"> Buscar cliente 
+    </label>
+    <label>
+      <input [(ngModel)]="selectOption"  type="radio" name="color" value="false"> crear cliente
+    </label>
+    <p>{{selectOption}}</p>
+</div>
+
+@if(selectOption=="true"){
+
+    <form [formGroup]="findCustomer" class="form-user">
+        <label for="cardIdInputFind">cardId</label>
+        <input type="number" name="cardIdInputFind" formControlName="cardId" >
+        <button (click)="findCustomerForm()">search customer</button>
+    </form>
+
+    <h2>{{userNotFund}}</h2>
+    @for (item of detailsUser; track $index) {
+        <p>id: {{item.cardId}}</p>
+        <p>name: {{item.fullName}}</p>
+        <p>Cell: {{item.cellPhone}}</p>
+        <p>Cell: {{item.email}}</p>
+        
+    }
+}
+
+@if(selectOption=="false"){
+
+    <form [formGroup]="customer" class="form-user">
+    
+        <span class="form-span">Create Customer</span>
+    
+        <label for="cardIdInput">cardId</label>
+        <input type="text" name="cardIdInput" formControlName="cardId" >
+    
+        <label for="fullNameInput">Full Name</label>
+        <input type="text" name="fullNameInput" formControlName="fullName" >
+    
+        <label for="emailInput">Email</label>
+        <input type="text" name="emailInput" formControlName="email" >
+    
+        <label for="cellPhoneInput">Cell Phone</label>
+        <input type="text" name="cellPhoneInput" formControlName="cellPhone" >
+    
+        <button (click)="createCustomer()">Crear usuario</button>
+    
+    </form>
+}
+
+<!-- @for (item of items.data; track $index) {
+    <p>{{item.idProduct}}</p>
+}  -->
+
+@if(items.data.length>=1){
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>idProduct</th>
+                <th>Price P</th>
+                <th>Amount</th>
+                <th>Total T</th>
+                <!-- <th>Ad</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            
+            @for (item of items.data; track $index) {
+                <tr>
+                    <td>{{item.idProduct}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.total}}</td> 
+                </tr>
+            }@empty {
+                
+            } 
+        </tbody>
+    </table>
+}

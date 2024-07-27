@@ -19,14 +19,14 @@
                     <p class="footer-card-item">Price:{{item.price}}</p>
                     <p class="footer-card-item red">Size:{{item.size}}</p>
                 </div>
-                <p class="footer-card-item red">Cantidad: {{item.cantidad}}</p>
+                <p class="footer-card-item red">Cantidad: {{item.amount}}</p>
                 
                 <div>
                     <button (click)="increment(1, item.id, idx)">+</button>
                     <button (click)="decrement(1, item.id, idx)">-</button>
                 </div>
                 <div>
-                    <button (click)="addCartBuy(item.id, item.cantidad)">Add Product</button>
+                    <button (click)="addCartBuy(item.id, item.amount)">Add Product</button>
                 </div>
             </div>
         }
@@ -41,7 +41,7 @@
 
 <div class="container-main">
         @if (this.carShopt.length >=1) {
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -62,7 +62,7 @@
                             <td>{{item.type}}</td>
                             <td>{{item.size}}</td>
                             <td>{{item.price}}</td>
-                            <td>{{item.cantidad}}
+                            <td>{{item.amount}}
                             <button (click)="incremenetShopinCart(id)">+</button>
                             <button (click)="decrementShopinCart(id)">-</button>
                             </td>
@@ -85,11 +85,16 @@
             </div> -->
 </div>
 <button (click)="sendShoppingNow()">shopping now</button>
+
+
 @if(shoppingNow){
 
     <div>
         <h2>{{Total}}</h2>
     </div>
+    
+    <button (click)="generateBill()">generate bill</button>
+    
+    
+    <app-findperson [items]="this.itemsFhater"></app-findperson>
 }
-
-<button (click)="generateBill()">generate bill</button>

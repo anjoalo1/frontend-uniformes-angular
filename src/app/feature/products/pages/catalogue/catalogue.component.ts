@@ -3,13 +3,14 @@ import { SendtokenserviceService } from '../../../../core/services/sendtoken/sen
 import { RouterModule } from '@angular/router';
 import { ProductDto } from '../../../../core/dto/productDto';
 import { find } from 'rxjs';
+import { FindpersonComponent } from "../../../persons/findperson/findperson.component";
 
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
   providers:[SendtokenserviceService, RouterModule],
-  imports: [],
+  imports: [FindpersonComponent],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
 })
@@ -21,6 +22,8 @@ export default class CatalogueComponent implements OnInit{
   carShopt:any[]=[];
   Total: number=0;
   shoppingNow:boolean=false;
+  carShoptSendBD: any[]=[];
+  itemsFhater:any={};
   constructor(private catalogue:SendtokenserviceService){
     
   }
@@ -36,18 +39,18 @@ export default class CatalogueComponent implements OnInit{
         } 
     })
   }
-  async addCartBuy(itemId:number, amount:number){
+   addCartBuy(itemId:number, amount:number){
       console.log(itemId);
-      const findDuplicity = await this.carShopt.find((pro)=>pro.id===itemId);
+      const findDuplicity =  this.carShopt.find((pro)=>pro.id===itemId);
       
       if(findDuplicity !== undefined){
 
-        let amount = 0;
+        let cantidad = 0;
         let total =0;
 
         let duplicy = {...findDuplicity};
-        amount = duplicy.amount + amount;
-        duplicy.cantidad = amount;
+        cantidad = duplicy.amount + amount;
+        duplicy.amount = cantidad;
         total = duplicy.amount * duplicy.price;
         duplicy.total = total;
         let myNewArray = this.carShopt.filter(objeto=>objeto.id !== itemId)
@@ -107,12 +110,17 @@ export default class CatalogueComponent implements OnInit{
 
   sendShoppingNow():void{
     console.log("shoppingNow");
-    //this.shoppingNow=true;
+    this.shoppingNow=true;
     console.log(this.carShopt);
 
     let formatCarShop  = this.carShopt.map(({id, description, nameProduct, size, type, ...rest})=>({idProduct:id, ...rest}));
     console.log(formatCarShop);
     let addDateId = formatCarShop.map((d:any)=>({...d, }))
+
+    this.itemsFhater = {
+      data: formatCarShop
+    }
+    this.carShoptSendBD =[...formatCarShop];
   }
 
   generateBill(){
