@@ -1,6 +1,5 @@
-<p>catalogue works!</p>
-
 @if (shoppingNow==false) {
+    <h1 class="title">CATALOGUE</h1>
 
     <div class="container-main">
         
@@ -35,13 +34,10 @@
 </div>
 
 
-}
-
-
-
 <div class="container-main">
         @if (this.carShopt.length >=1) {
             <table class="table">
+                <caption>Detals Products</caption>
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -84,17 +80,25 @@
                 <h2 class="title-h2">Total: $ <span></span></h2>
             </div> -->
 </div>
+<div>
+    <h2>{{Total}}</h2>
+</div>
 <button (click)="sendShoppingNow()">shopping now</button>
+}
+
+
+
 
 
 @if(shoppingNow){
 
-    <div>
-        <h2>{{Total}}</h2>
-    </div>
     
     <button (click)="generateBill()">generate bill</button>
     
     
-    <app-findperson [items]="this.itemsFhater"></app-findperson>
+    <app-findperson [items]="this.itemsFhater" (newItemEvent)="addItem($event)"></app-findperson>
+    
 }
+
+
+

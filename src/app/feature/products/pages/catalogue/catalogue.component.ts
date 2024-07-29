@@ -109,18 +109,24 @@ export default class CatalogueComponent implements OnInit{
   }
 
   sendShoppingNow():void{
-    console.log("shoppingNow");
-    this.shoppingNow=true;
-    console.log(this.carShopt);
 
-    let formatCarShop  = this.carShopt.map(({id, description, nameProduct, size, type, ...rest})=>({idProduct:id, ...rest}));
-    console.log(formatCarShop);
-    let addDateId = formatCarShop.map((d:any)=>({...d, }))
+    if(this.carShopt.length<=0){
+      
+    }else{
 
-    this.itemsFhater = {
-      data: formatCarShop
+      console.log("shoppingNow");
+      this.shoppingNow=true;
+      console.log(this.carShopt);
+  
+      let formatCarShop  = this.carShopt.map(({id, description, nameProduct, size, type, ...rest})=>({idProduct:id, ...rest}));
+      console.log(formatCarShop);
+      let addDateId = formatCarShop.map((d:any)=>({...d, }))
+  
+      this.itemsFhater = {
+        data: formatCarShop
+      }
+      this.carShoptSendBD =[...formatCarShop];
     }
-    this.carShoptSendBD =[...formatCarShop];
   }
 
   generateBill(){
@@ -138,5 +144,11 @@ export default class CatalogueComponent implements OnInit{
   }
 
 
+
+  addItem(newItem: boolean) {
+    this.shoppingNow=newItem;
+    this.carShopt=[];
+    this.sumarTotal();
+  }
 
 }

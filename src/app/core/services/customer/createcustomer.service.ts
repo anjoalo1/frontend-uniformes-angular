@@ -1,26 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CreateillService {
+export class CreatecustomerService {
 
 
-  private token:string="";
-  private url:string='http://localhost:8086/bill';
+  private url:string='http://localhost:8086/customer';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
 
-  createBill(myObjecto:any):void{
 
+  createCustomer(body:any):Observable<any>{
     const headers = { 
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com)",
       'Content-Type': 'application/json'
-    
     };
-    this.http.post(this.url, myObjecto, {headers}).subscribe(res=>(console.log(res)));
+    return this.http.post(this.url, body, {headers} );
   }
 }
