@@ -14,6 +14,10 @@ export class CreatecustomerService {
 
 
 
+  findCustomer(id:number):Observable<any>{
+    return this.http.get(this.url);
+  }
+
   createCustomer(body:any):Observable<any>{
     const headers = { 
       "Accept": "*/*",
