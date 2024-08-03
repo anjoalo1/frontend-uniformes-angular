@@ -1,16 +1,20 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormfindpersonComponent } from "../../../persons/formfindperson/formfindperson.component";
+import { CreatecustomerComponent } from "../../../persons/createcustomer/createcustomer.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [FormfindpersonComponent, CreatecustomerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export default class HomeComponent  {
-
-
+ myShoppinCar: any[]=[
+  { "id": null,"idProduct": 1,"price": 30000,"amount": 1,"total": 30000,},
+  { "id": null,"idProduct": 2,"price": 30000,"amount": 2,"total": 60000,}
+ ];
   constructor(private renderer2: Renderer2){
 
   }
@@ -24,6 +28,7 @@ export default class HomeComponent  {
     const asTitle = this.title.nativeElement;
     console.log(asTitle);
     this.renderer2.setStyle(asTitle, 'color', 'red');
+    
     
   }
 

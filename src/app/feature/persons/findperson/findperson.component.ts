@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class FindpersonComponent {
   @Input() items: any;
   @Output() newItemEvent = new EventEmitter<boolean>();
-isActive: any;
+  isActive: any;
 
   addNewItem(value: boolean) {
     this.newItemEvent.emit(value);
