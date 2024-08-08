@@ -3,14 +3,14 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreatecustomerService } from '../../../core/services/customer/createcustomer.service';
 import { FindcustomerService } from '../../../core/services/find/findcustomer.service';
-import { CreateillService } from '../../../core/services/bill/createBill.service';
+import { CreateiBllService } from '../../../core/services/bill/createBill.service';
 import { BillDetailsService } from '../../../core/services/bill_details/bill-details.service';
 
 @Component({
   selector: 'app-createcustomer',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  providers:[CreatecustomerService, FindcustomerService, CreateillService, BillDetailsService],
+  providers:[CreatecustomerService, FindcustomerService, CreateiBllService, BillDetailsService],
   templateUrl: './createcustomer.component.html',
   styleUrl: './createcustomer.component.css'
 })
@@ -21,7 +21,7 @@ export class CreatecustomerComponent {
   @Input() shoppinCar: any[]=[];
 
   constructor(private fb: FormBuilder, private createCustomerService: CreatecustomerService, private findCustomerService: FindcustomerService,
-    private createBill: CreateillService, private createBillDetails: BillDetailsService
+    private createBill: CreateiBllService, private createBillDetails: BillDetailsService
   ){
 
     this.customer = this.fb.group({

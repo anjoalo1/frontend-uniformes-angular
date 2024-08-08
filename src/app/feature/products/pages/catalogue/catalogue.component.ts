@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { SendtokenserviceService } from '../../../../core/services/sendtoken/sendtokenservice.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductDto } from '../../../../core/dto/productDto';
 import { find } from 'rxjs';
 import { FindpersonComponent } from "../../../persons/findperson/findperson.component";
+import { TokenService } from '../../../../core/services/token/token.service';
 
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
-  providers:[SendtokenserviceService, RouterModule],
+  providers:[SendtokenserviceService, RouterModule, TokenService],
   imports: [FindpersonComponent],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
@@ -24,7 +25,7 @@ export default class CatalogueComponent implements OnInit{
   shoppingNow:boolean=false;
   carShoptSendBD: any[]=[];
   itemsFhater:any={};
-  constructor(private catalogue:SendtokenserviceService){
+  constructor(private catalogue:SendtokenserviceService, private tokenDelete: TokenService, private router: Router){
     
   }
 
@@ -34,8 +35,15 @@ export default class CatalogueComponent implements OnInit{
           const  addAmount = res.map((d:any)=>({...d, amount:1, total:0}));
           this.myProducts=[...addAmount];
         },
-        error:(error)=>{
-          console.log(error);
+        error:(status)=>{
+          console.log("status", status);
+          console.log("status", status.status);
+          if(status.status==401){
+            this.tokenDelete.deleteToken();
+            this.router.navigate(['/login'])
+            //console.log("el error es 401")
+          }
+          
         } 
     })
   }

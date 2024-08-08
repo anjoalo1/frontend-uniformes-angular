@@ -52,48 +52,61 @@
     </div>
     
     <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
-       <div class="wrap-modal">
-        <div class="child-modal">
-            <h2>Esta seguro de realizar esta compra?</h2>
-            <div class="button-buy">
-                <button (click)="saveBillBD(this.customerId)">
-                Generate Bill with is user?</button>
-                <!-- </button>
-                <button type="button" (click)="addNewItem(this.backCatalogue)">
-                Exit buy
-                </button> -->
-                <button type="button">Exit buy</button>
-        
-                <button type="button" (click)="changeModal()">
-                    Cancel
-                    </button>
+        @if(completeBuySave==false){
+            <div class="wrap-modal">
+                <div class="child-modal">
+                    <h2>Esta seguro de realizar esta compra?</h2>
+                    <div class="button-buy">
+                        <button (click)="saveBillBD(this.customerId)">
+                        Generate Bill with is user?</button>
+                        <!-- </button>
+                        <button type="button" (click)="addNewItem(this.backCatalogue)">
+                        Exit buy
+                        </button> -->
+                        <button type="button">Exit buy</button>
+                
+                        <button type="button" (click)="changeModal()">
+                            Cancel
+                            </button>
+                        </div>
+                
+                    <!--  <button (click)="changeModal()">changetStyle</button> -->
+                    <table class="table">
+                        <caption>Details Products</caption>
+                        <thead>
+                        <tr>
+                            <th>idProduct</th>
+                            <th>Price P</th>
+                            <th>Amount</th>
+                            <th>Total T</th>
+                            <!-- <th>Ad</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for (item of shoppinCar; track $index) {
+                        <tr>
+                            <td>{{ item.idProduct }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.amount }}</td>
+                            <td>{{ item.total }}</td>
+                        </tr>
+                        }@empty { }
+                        </tbody>
+                    </table>
                 </div>
-        
-            <!--  <button (click)="changeModal()">changetStyle</button> -->
-            <table class="table">
-                <caption>Details Products</caption>
-                <thead>
-                <tr>
-                    <th>idProduct</th>
-                    <th>Price P</th>
-                    <th>Amount</th>
-                    <th>Total T</th>
-                    <!-- <th>Ad</th> -->
-                </tr>
-                </thead>
-                <tbody>
-                @for (item of shoppinCar; track $index) {
-                <tr>
-                    <td>{{ item.idProduct }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.amount }}</td>
-                    <td>{{ item.total }}</td>
-                </tr>
-                }@empty { }
-                </tbody>
-            </table>
-        </div>
-       </div>
+               </div>
+        }@else {
+            <div class="wrap-modal">
+                <div class="child-modal">
+                    <p>Buy is Succefull!</p>
+                    <!-- shoe button other buy -->
+                    <button>Other buy</button>
+                    <!-- exit this component -->
+                    <button>exit</button>
+                </div>
+
+            </div>
+        }
     </div>
 }
 

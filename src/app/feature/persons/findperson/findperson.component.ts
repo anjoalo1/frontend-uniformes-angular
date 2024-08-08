@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FindcustomerService } from '../../../core/services/find/findcustomer.service';
-import { CreateillService } from '../../../core/services/bill/createBill.service';
+import { CreateiBllService } from '../../../core/services/bill/createBill.service';
 import { BillDetailsService } from '../../../core/services/bill_details/bill-details.service';
 import { debounceTime, Observable } from 'rxjs';
 import { CreatecustomerService } from '../../../core/services/customer/createcustomer.service';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-findperson',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  providers:[FindcustomerService, CreateillService, BillDetailsService, CreatecustomerService,],
+  providers:[FindcustomerService, CreateiBllService, BillDetailsService, CreatecustomerService,],
   templateUrl: './findperson.component.html',
   styleUrl: './findperson.component.css'
 })
@@ -53,7 +53,7 @@ export class FindpersonComponent {
   }
 
   constructor(private fb: FormBuilder, private fb2: FormBuilder, private findCustomerService: FindcustomerService,
-    private createBill: CreateillService, private createBillDetails: BillDetailsService,
+    private createBill: CreateiBllService, private createBillDetails: BillDetailsService,
     private createCustomerService: CreatecustomerService
   ){
 

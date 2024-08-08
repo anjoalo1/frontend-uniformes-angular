@@ -15,9 +15,7 @@ export default class HomeComponent  {
   { "id": null,"idProduct": 1,"price": 30000,"amount": 1,"total": 30000,},
   { "id": null,"idProduct": 2,"price": 30000,"amount": 2,"total": 60000,}
  ];
-  constructor(private renderer2: Renderer2){
-
-  }
+  constructor(private renderer2: Renderer2){}
 
 
 
@@ -28,8 +26,6 @@ export default class HomeComponent  {
     const asTitle = this.title.nativeElement;
     console.log(asTitle);
     this.renderer2.setStyle(asTitle, 'color', 'red');
-    
-    
   }
 
   showP():void{

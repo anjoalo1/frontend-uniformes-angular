@@ -34,7 +34,7 @@ export default class LoginComponent extends AppBaseComponent{
     // Verificamos si el control está inválido y si se ha tocado (es decir, se ha enfocado y luego perdido el foco)
     if (this.login.invalid && this.login.touched) {
       // Si el correo electrónico no es válido, mostramos un mensaje específico
-      console.log('fasdfasdfasdf');
+      console.log('El correo no es valido');
 
       if(this.login.get('email')?.invalid){
         console.log("no es un correo valido")
