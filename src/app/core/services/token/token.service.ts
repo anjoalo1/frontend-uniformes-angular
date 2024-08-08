@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { getCookie, setCookie } from 'typescript-cookie'
+import { getCookie, removeCookie, setCookie } from 'typescript-cookie'
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,7 @@ export class TokenService {
   }
 
   public deleteToken():void{
-
+    removeCookie("token");
+    console.log("cookier removida")
   }
 }

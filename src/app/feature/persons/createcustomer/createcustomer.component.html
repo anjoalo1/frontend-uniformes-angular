@@ -1,0 +1,160 @@
+<p>createcustomer works!</p>
+
+<form [formGroup]="customer" class="form-customer-create">
+    <div class="div-span">
+      <span class="form-span">Create Customer</span>
+    </div>
+  
+    <div class="items-form">
+      <label for="cardIdInput">cardId</label>
+      <input type="text" name="cardIdInput" formControlName="cardId" />
+      <!-- <span>{{validateField('cardId')}}</span> -->
+    </div>
+  
+    <div class="items-form">
+      <label for="fullNameInput">Full Name</label>
+      <input type="text" name="fullNameInput" formControlName="fullName" />
+    </div>
+  
+    <div class="items-form">
+      <label for="emaInput">Email</label>
+      <input type="email" name="emaInput" formControlName="email" />
+    </div>
+  
+    <div class="items-form">
+      <label for="cellPhoneInput">Cell Phone</label>
+      <input type="text" name="cellPhoneInput" formControlName="cellPhone" />
+    </div>
+  
+    <button (click)="createCustomer()">Crear usuario</button>
+    <h2>{{this.errorCreateCustomer}}</h2>
+
+  </form>
+
+  @if (succesfullCreateCustomer==true) {
+    <h2>Usuario creado correctamente</h2>
+      
+      <div class="data-customer-create">
+          <table class="table">
+              <caption>Details Customer</caption>
+              <thead>
+                  <tr>
+                      <th>CARD ID</th>
+                      <th>NAME</th>
+                      <th>EMAIL</th>
+                      <th>CELL PHONE</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @for (item of customerCreatedData; track $index) {
+                        <tr>
+                            <td>{{ item.cardId }}</td>
+                            <td>{{ item.fullName }}</td>
+                            <td>{{item.email }}</td>
+                            <td>{{ item.cellPhone }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button (click)="changeModal()">Crear compra con este usuario</button>
+            
+        </div>
+    }@else {
+
+    }
+        
+
+  <table class="table">
+    <caption>Details Products</caption>
+    <thead>
+    <tr>
+        <th>idProduct</th>
+        <th>Price P</th>
+        <th>Amount</th>
+        <th>Total T</th>
+       
+    </tr>
+    </thead>
+    <tbody>
+    @for (item of shoppinCar; track $index) {
+    <tr>
+        <td>{{ item.idProduct }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.amount }}</td>
+        <td>{{ item.total }}</td>
+    </tr>
+    }@empty { }
+    </tbody>
+</table>
+
+
+  @if(this.succesfullCreateCustomer==true){
+    
+    <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
+      <h2>Esta seguro de realizar esta compra?</h2>
+      <div class="button-buy">
+          <button (click)="saveBillBD(customerId)">
+          Generate Bill with is user?
+          </button>
+
+          <button (click)="cancelBuy()">Cancel</button>
+
+        
+          <!-- <button type="button" (click)="addNewItem(this.backCatalogue)">
+          Exit buy
+          </button> -->
+      </div>
+
+      <div>
+        <table class="table">
+            <caption>Details Customer</caption>
+          <thead>
+            <tr>
+              <th>CARD ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>CELL PHONE</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            @for (item of customerCreatedData; track $index) {
+            <tr>
+              <td>{{ item.cardId }}</td>
+              <td>{{ item.fullName }}</td>
+              <td>{{item.email }}</td>
+              <td>{{ item.cellPhone }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+  
+      <!--  <button (click)="changeModal()">changetStyle</button> -->
+      <table class="table">
+          <caption>Details Products</caption>
+          <thead>
+          <tr>
+              <th>idProduct</th>
+              <th>Price P</th>
+              <th>Amount</th>
+              <th>Total T</th>
+             
+          </tr>
+          </thead>
+          <tbody>
+          @for (item of shoppinCar; track $index) {
+          <tr>
+              <td>{{ item.idProduct }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.total }}</td>
+          </tr>
+          }@empty { }
+          </tbody>
+      </table>
+      </div>
+  
+  }

@@ -1,0 +1,141 @@
+<p>formfindperson works!</p>
+
+
+<!-- formulario para buscar usuario -->
+
+<form [formGroup]="findCustomer" class="form-user">
+    <label for="cardIdInputFind" class="label-card-id">cardId</label>
+    <input type="number" name="cardIdInputFind" formControlName="cardId" placeholder="Insert your card id"
+    class="input-card-id"
+    />
+    <button (click)="findCustomerForm()" class="search-customer">Find</button>
+  </form>
+
+  <h2>{{this.messageCustomerNotFound}}</h2>
+
+  <!-- si el usuario no se encuentra no renderiza nada -->
+  
+  @if(this.booleanCustomerFound==false){
+
+    
+      
+}@else {
+    <!-- en caso de que la busqueda sea correcta muestra los datos del usuario -->
+        <div class="information-customer">
+        <table class="table">
+            <caption>Details Customer</caption>
+            <thead>
+                <tr>
+                    <th>CARD ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>CELL PHONE</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @for (item of detailsCustomer; track $index) {
+                    <tr>
+                        <td>{{ item.cardId }}</td>
+                        <td>{{ item.fullName }}</td>
+                        <td>{{item.email }}</td>
+                        <td>{{ item.cellPhone }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- este boton abre una modal para confirmar la aceptacion del usuario
+        mostrando una ve 
+        -->
+        <button (click)="changeModal()">Buy</button>
+    </div>
+    
+    <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
+        @if(completeBuySave==false){
+            <div class="wrap-modal">
+                <div class="child-modal">
+                    <h2>Esta seguro de realizar esta compra?</h2>
+                    <div class="button-buy">
+                        <button (click)="saveBillBD(this.customerId)">
+                        Generate Bill with is user?</button>
+                        <!-- </button>
+                        <button type="button" (click)="addNewItem(this.backCatalogue)">
+                        Exit buy
+                        </button> -->
+                        <button type="button">Exit buy</button>
+                
+                        <button type="button" (click)="changeModal()">
+                            Cancel
+                            </button>
+                        </div>
+                
+                    <!--  <button (click)="changeModal()">changetStyle</button> -->
+                    <table class="table">
+                        <caption>Details Products</caption>
+                        <thead>
+                        <tr>
+                            <th>idProduct</th>
+                            <th>Price P</th>
+                            <th>Amount</th>
+                            <th>Total T</th>
+                            <!-- <th>Ad</th> -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for (item of shoppinCar; track $index) {
+                        <tr>
+                            <td>{{ item.idProduct }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.amount }}</td>
+                            <td>{{ item.total }}</td>
+                        </tr>
+                        }@empty { }
+                        </tbody>
+                    </table>
+                </div>
+               </div>
+        }@else {
+            <div class="wrap-modal">
+                <div class="child-modal">
+                    <p>Buy is Succefull!</p>
+                    <!-- shoe button other buy -->
+                    <button>Other buy</button>
+                    <!-- exit this component -->
+                    <button>exit</button>
+                </div>
+
+            </div>
+        }
+    </div>
+}
+
+<!-- fin del if de busqueda de usuarios -->
+
+@if(shoppinCar.length>=1){
+    <div>
+        <table class="table">
+            <caption>Details Products</caption>
+            <thead>
+                <tr>
+                    <th>ID PRODUCT</th>
+                    <th>PRICE</th>
+                    <th>AMOUNT</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                @for (item of shoppinCar; track $index) {
+                    <tr>
+                        <td>{{ item.idProduct }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{item.amount }}</td>
+                        <td>{{ item.total }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+    

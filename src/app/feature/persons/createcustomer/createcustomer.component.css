@@ -1,0 +1,175 @@
+.form-user{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 300px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.form-span{
+  margin: 0 auto;
+  align-content: center;
+}
+
+.div-span{
+  width: 200px;
+  margin: 0 auto;
+}
+ 
+.form-customer-create{
+  background-color: aqua;
+  max-width: 600px;
+  min-width: 200px;
+  margin: 10px auto;
+  padding: 10px;
+  
+}
+
+.items-form{
+  display: grid;
+  width: auto;
+  grid-template-columns: 150px minmax(0px,  1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+.items-form>label{
+  color: blueviolet;
+  font-size: 1.5rem;
+  border-radius: 4px;
+}
+.items-form>input:focus{
+  background-color: #dc3a55;
+}
+
+.items-form>input{
+  border: 2px solid rgb(46, 46, 204);
+  background-color: #ddd;
+}
+
+
+@media screen and (max-width: 300px){
+  .items-form{
+    display: grid;
+    width: auto;
+    grid-template-columns: minmax(0px,  1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px auto;
+  }
+  
+}
+
+.search-customer{
+  padding: 5px;
+  background-color: #dc3a55;
+  font-size: 1rem;
+  width: 100px;
+ border-radius: 5px;
+
+}
+
+.search-customer:hover{
+  background-color:#1a69d7;
+}
+h2{
+  text-align: center;
+  margin: 20px auto;
+  color: red;
+}
+
+
+.table {
+  width: 90%;
+  border-collapse: collapse;
+  overflow-wrap:break-word;
+  word-wrap: break-word;
+  margin: 20px auto;
+  table-layout: fixed;
+}
+
+td{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table th, .table td {
+  padding: 8px;
+  text-align: left;
+  overflow-wrap:break-word;
+}
+
+.table td{
+  border: 1px solid #ddd;
+}
+
+thead>tr>th:first-child{
+  border-top-left-radius: 10px;
+}
+
+thead>tr>th:last-child{
+  border-top-right-radius: 10px;
+}
+
+tbody>tr:hover{
+  background-color: #1a69d7;
+}
+
+.table th {
+  background-color: #dc3a55;
+  border-collapse: separate;
+  word-wrap: break-word;
+  padding: 10px;
+  overflow-wrap:break-word;
+}
+
+
+/* modales */
+
+.estilo1 {
+  background-color: blue;
+  color: white;
+  display: none;
+}
+
+.estilo2 {
+  width: 100vw;
+  height: 100vh; 
+  display: flex;
+  position: absolute;
+  top: 0;
+  background-color: rgba(22, 22, 69, 0.825);
+  color: white;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.child-modal{
+  width: auto;
+  display: flex;
+  color: white;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.button-buy{
+  width: auto;
+}
+
+.button-buy>button{
+  width: auto;
+  background-color: #04080d;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+  margin-left: 20px;
+}
+
+.button-buy>button:hover{
+  background-color: chocolate;
+}
