@@ -5,13 +5,16 @@ import { ProductDto } from '../../../../core/dto/productDto';
 import { find } from 'rxjs';
 import { FindpersonComponent } from "../../../persons/findperson/findperson.component";
 import { TokenService } from '../../../../core/services/token/token.service';
+import { LoadproductsComponent } from "../loadproducts/loadproducts.component";
+import { CarshoppingComponent } from "../carshopping/carshopping.component";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
   providers:[SendtokenserviceService, RouterModule, TokenService],
-  imports: [FindpersonComponent],
+  imports: [FindpersonComponent, LoadproductsComponent, CarshoppingComponent, CommonModule],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
 })
@@ -158,5 +161,24 @@ export default class CatalogueComponent implements OnInit{
     this.carShopt=[];
     this.sumarTotal();
   }
+
+
+
+  /* catalogue new */
+  showCarShopping(){
+    console.log("sho car shopin now");
+    
+      this.isActive = !this.isActive; // Cambia el valor de isActive
+    
+  }
+
+
+
+
+  isActive: boolean = false; // Inicialmente activo
+
+
+  // Función para alternar el estado de isActive
+  
 
 }

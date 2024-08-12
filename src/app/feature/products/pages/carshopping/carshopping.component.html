@@ -1,1 +1,47 @@
 <p>carshopping works!</p>
+
+@if(items.length<=0){
+
+}@else {
+
+    <div>
+        <table class="table">
+                <caption>Details Products</caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Price P</th>
+                    <th>size</th>
+                    <th>Amount</th>
+                    <th>Total T</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of items; track $index) {
+                    <tr>
+                        <td>{{ item.idProduct }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.size }}</td>
+                        <td>{{ item.amount }}</td>
+                        <td>{{ item.total }}</td>
+                        <td>{{ item.type }}</td>
+                    </tr>
+                }
+    
+                @if(totalBill<=0){
+                    
+                }@else { 
+                    <tr>
+                        <td colspan="1">TOTAL</td>
+                        <td colspan="5" class="total-carshop">$ {{totalBill}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+
+<!--  <button (click)="showCar()">ver productos</button> -->

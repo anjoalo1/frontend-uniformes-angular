@@ -1,4 +1,4 @@
-@if (shoppingNow==false) {
+<!-- @if (shoppingNow==false) {
     <h1 class="title">CATALOGUE</h1>
 
     <div class="container-main">
@@ -46,7 +46,7 @@
                         <th>Prec Unt</th>
                         <th>Cantidad</th>
                         <th>Precio T</th>
-                        <!-- <th>Ad</th> -->
+                    
                     </tr>
                 </thead>
                 <tbody>
@@ -76,20 +76,18 @@
             </table>
         }
         
-           <!--  <div >
-                <h2 class="title-h2">Total: $ <span></span></h2>
-            </div> -->
+         
 </div>
 <div>
     <h2>{{Total}}</h2>
 </div>
 <button (click)="sendShoppingNow()">shopping now</button>
 }
+ -->
 
 
 
-
-
+<!-- 
 @if(shoppingNow){
 
     
@@ -98,7 +96,30 @@
     
     <app-findperson [items]="this.itemsFhater" (newItemEvent)="addItem($event)"></app-findperson>
     
-}
+} -->
+<div class="main">
+<h1>h1</h1>
+  <nav>
+    <ul class="bar-nav">
+        <li>1</li>
+        <li>2</li>
+        <li>
+            <div class="container-car-shop" (click)="showCarShopping()">
+                <p>Car-shop</p>
+            </div>
+        </li>
+    </ul>
+  </nav>
 
+    
+    <h2>nuevo componente</h2>
+    
+    <app-loadproducts></app-loadproducts>
+
+    <div [ngClass]="{'active': isActive, 'disabled':!isActive }">
+        <button (click)="showCarShopping()">X</button>
+        <app-carshopping></app-carshopping>
+    </div>
+</div>
 
 
