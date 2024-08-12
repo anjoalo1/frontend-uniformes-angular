@@ -8,13 +8,14 @@ import { TokenService } from '../../../../core/services/token/token.service';
 import { LoadproductsComponent } from "../loadproducts/loadproducts.component";
 import { CarshoppingComponent } from "../carshopping/carshopping.component";
 import { CommonModule } from '@angular/common';
+import { FormfindpersonComponent } from "../../../persons/formfindperson/formfindperson.component";
 
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
   providers:[SendtokenserviceService, RouterModule, TokenService],
-  imports: [FindpersonComponent, LoadproductsComponent, CarshoppingComponent, CommonModule],
+  imports: [FindpersonComponent, LoadproductsComponent, CarshoppingComponent, CommonModule, FormfindpersonComponent],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
 })
@@ -22,18 +23,20 @@ export default class CatalogueComponent implements OnInit{
 
 
 
-  myProducts:any[]=[];
+ /*  myProducts:any[]=[]; */
   carShopt:any[]=[];
   Total: number=0;
-  shoppingNow:boolean=false;
+  /* shoppingNow:boolean=false;
   carShoptSendBD: any[]=[];
-  itemsFhater:any={};
+  itemsFhater:any={}; */
+  isActive: boolean = false; // Inicialmente activo
   constructor(private catalogue:SendtokenserviceService, private tokenDelete: TokenService, private router: Router){
     
   }
-
+  
   ngOnInit(): void {
-    this.catalogue.sendHeader().subscribe({
+    this.isActive=false;
+  /*   this.catalogue.sendHeader().subscribe({
         next:(res)=>{
           const  addAmount = res.map((d:any)=>({...d, amount:1, total:0}));
           this.myProducts=[...addAmount];
@@ -48,9 +51,24 @@ export default class CatalogueComponent implements OnInit{
           }
           
         } 
-    })
+    }) */
   }
-   addCartBuy(itemId:number, amount:number){
+
+  sumarTotal(){
+    const sumaPrecios: number = this.carShopt.reduce((acumulador, producto) => {
+      return acumulador + producto.total;
+    }, 0);
+    
+    console.log(this.carShopt);
+    this.Total = sumaPrecios;
+  }
+  
+  showCarShopping(){
+    console.log("sho car shopin now");
+      this.isActive = !this.isActive; // Cambia el valor de isActive 
+  }
+  
+  /* addCartBuy(itemId:number, amount:number){
       console.log(itemId);
       const findDuplicity =  this.carShopt.find((pro)=>pro.id===itemId);
       
@@ -77,8 +95,8 @@ export default class CatalogueComponent implements OnInit{
         this.sumarTotal();
         console.log(this.Total);
      }
-  }
-
+  } */
+/* 
   increment(amount:number, itemId:number,idx:number){
 
     this.myProducts[idx].amount +=1;
@@ -97,9 +115,9 @@ export default class CatalogueComponent implements OnInit{
       this.carShopt[id].total = this.carShopt[id].amount * this.carShopt[id].price;
     }
     this.sumarTotal();
-  }
+  } */
 
-  decrementShopinCart(id:number):void{
+/*   decrementShopinCart(id:number):void{
     if(this.carShopt[id].amount<=1)return
     else {
       this.carShopt[id].amount-=1;
@@ -107,18 +125,10 @@ export default class CatalogueComponent implements OnInit{
     }
     this.sumarTotal();
   }
+ */
 
 
-
-  sumarTotal(){
-    const sumaPrecios: number = this.carShopt.reduce((acumulador, producto) => {
-      return acumulador + producto.total;
-    }, 0);
-
-    console.log(this.carShopt);
-    this.Total = sumaPrecios;
-  }
-
+  /* 
   sendShoppingNow():void{
 
     if(this.carShopt.length<=0){
@@ -138,9 +148,9 @@ export default class CatalogueComponent implements OnInit{
       }
       this.carShoptSendBD =[...formatCarShop];
     }
-  }
+  } */
 
-  generateBill(){
+/*   generateBill(){
     let fechaISO: string = new Date().toISOString();
     console.log(fechaISO);
 
@@ -153,29 +163,13 @@ export default class CatalogueComponent implements OnInit{
 
     this.catalogue.sendPostBill(myBody);
   }
+ */
 
 
-
-  addItem(newItem: boolean) {
-    this.shoppingNow=newItem;
-    this.carShopt=[];
-    this.sumarTotal();
-  }
 
 
 
   /* catalogue new */
-  showCarShopping(){
-    console.log("sho car shopin now");
-    
-      this.isActive = !this.isActive; // Cambia el valor de isActive
-    
-  }
-
-
-
-
-  isActive: boolean = false; // Inicialmente activo
 
 
   // Función para alternar el estado de isActive
