@@ -1,4 +1,4 @@
-<p>formfindperson works!</p>
+
 
 
 <!-- formulario para buscar usuario -->
@@ -48,7 +48,7 @@
         <!-- este boton abre una modal para confirmar la aceptacion del usuario
         mostrando una ve 
         -->
-        <button (click)="changeModal()">Buy</button>
+        <button (click)="changeModal()" [disabled]="this.shoppinCar.length<=0">Buy</button>
     </div>
     
     <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">

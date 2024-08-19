@@ -1,8 +1,4 @@
 
-
-
-    <p>loadproducts works!</p>
-    
     <div>
         <select name="" id="" [(ngModel)]="selectedProductId" (change)="onProductChange(selectedProductId)">
             <option value="todos">todos</option>
@@ -37,62 +33,3 @@
         
     </div>
     
-    
-    <button type="button" (click)="showCarShopingComponent()">Show Shoping cart!</button>
-    
-    
-    
-    <!-- 
-        <table class="table">
-            <caption>Detals Products</caption>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name Product</th>
-                    <th>Price P</th>
-                    <th>size</th>
-            <th>Amount</th>
-            <th>Total T</th>
-            <th>Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        @for (item of products; track $index) {
-        <tr>
-            <td>{{ item.idProduct }}</td>
-            <td>{{ item.name_product }}</td>
-            <td>{{ item.price }}</td>
-            <td>{{ item.size }}</td>
-            <td>{{ item.amount }}</td>
-            <td>{{ item.total }}</td>
-            <td>{{ item.type }}</td>
-        </tr>
-       }
-        </tbody>
-    </table> -->
-
-<!-- 
-    <div class="container">
-
-    
-        @for (item of this.categoryProducts; track item.id; let idx = $index) {
-            <article class="product-card">
-                <header>
-                    <h2 class="title-header-card">{{item.name_product}}</h2>
-                </header>
-                <main>
-                    <p>Size: {{item.size}}</p>
-                    <h2 class="price-card"><span>$</span>{{item.price * item.amount}}</h2>
-                    <div class="amount-card">
-                        <button class="button-inc-card" (click)="incrementProduct(idx)">+</button>
-                        <button class="button-inc-card" (click)="derrementProduct(idx)">-</button>
-                        <p>Amount: {{item.amount}}</p>
-                    </div>
-                    <div class="button-card-shop-container">
-                        <button class="button-card-shop" (click)="addShopingCart(item.idProduct, item.amount)">Add shop car</button>
-                    </div>
-                </main>
-            </article>
-        }
-        
-    </div> -->

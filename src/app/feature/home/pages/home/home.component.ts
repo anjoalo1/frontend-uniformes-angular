@@ -4,11 +4,13 @@ import { FormfindpersonComponent } from "../../../persons/formfindperson/formfin
 import { CreatecustomerComponent } from "../../../persons/createcustomer/createcustomer.component";
 import { LoadproductsComponent } from "../../../products/pages/loadproducts/loadproducts.component";
 import { CarshoppingComponent } from "../../../products/pages/carshopping/carshopping.component";
+import { FindpersonComponent } from "../../../persons/findperson/findperson.component";
+import { BuyComponent } from "../../../products/pages/buy/buy.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormfindpersonComponent, CreatecustomerComponent, LoadproductsComponent, CarshoppingComponent],
+  imports: [FormfindpersonComponent, CreatecustomerComponent, LoadproductsComponent, CarshoppingComponent, FindpersonComponent, BuyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

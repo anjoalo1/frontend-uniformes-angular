@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FindcustomerService } from '../../../core/services/find/findcustomer.service';
 import { CreateiBllService } from '../../../core/services/bill/createBill.service';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './formfindperson.component.html',
   styleUrl: './formfindperson.component.css'
 })
-export class FormfindpersonComponent {
+export class FormfindpersonComponent implements OnInit{
 
   shoppinCar: any[]=[];
 
@@ -39,6 +39,11 @@ export class FormfindpersonComponent {
     this.findCustomer = this.fb2.group({
       cardId:['', [Validators.required]]
     });  
+  }
+  ngOnInit(): void {
+    this.carshopService.items.subscribe(updateItems=>{
+      this.shoppinCar = updateItems;
+    })
   }
 
 
@@ -125,16 +130,20 @@ export class FormfindpersonComponent {
     this.changeModal();
     this.completeBuySave = false;
     this.carshopService.clearItems();
-    this.router.navigate(['/catalogue']);
+    this.messageCustomerNotFound="";
+    this.booleanCustomerFound=false;
     this.detailsCustomer=[];
+    this.router.navigate(['/catalogue']);
   }
-
+  
   returnHome():void{
     console.log("return hombe");
     this.changeModal();
     this.completeBuySave = false;
     this.carshopService.clearItems();
     this.detailsCustomer=[];
+    this.messageCustomerNotFound="";
+    this.booleanCustomerFound=false;
     this.router.navigate(['/home']);
   }
 }

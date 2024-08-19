@@ -46,6 +46,7 @@ export class LoadproductsComponent implements OnInit{
       },
       error:(error)=>{
         console.log(error);
+        console.log(error.body);
       },
       complete:()=>{console.log("se completo la consulta")}
     })

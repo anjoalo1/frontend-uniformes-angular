@@ -1,128 +1,70 @@
-<!-- @if (shoppingNow==false) {
-    <h1 class="title">CATALOGUE</h1>
 
-    <div class="container-main">
-        
-        
-        @for (item of myProducts; track item.id; let idx = $index) {
-            
-            <div class="products">
-                <span class="header-card">
-                </span>
-                <div class="content-main">
-                    <p class="title-card">{{item.nameProduct}}</p>
-                    <p class="description-card">{{item.description}}</p>
-                    <p>Type:{{item.type}}</p>
-                </div>
-                <div class="footer-card">
-                    <p class="footer-card-item">Price:{{item.price}}</p>
-                    <p class="footer-card-item red">Size:{{item.size}}</p>
-                </div>
-                <p class="footer-card-item red">Cantidad: {{item.amount}}</p>
-                
-                <div>
-                    <button (click)="increment(1, item.id, idx)">+</button>
-                    <button (click)="decrement(1, item.id, idx)">-</button>
-                </div>
-                <div>
-                    <button (click)="addCartBuy(item.id, item.amount)">Add Product</button>
-                </div>
-            </div>
-        }
-        
-        
-</div>
-
-
-<div class="container-main">
-        @if (this.carShopt.length >=1) {
-            <table class="table">
-                <caption>Detals Products</caption>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Tipo P</th>
-                        <th>size</th>
-                        <th>Prec Unt</th>
-                        <th>Cantidad</th>
-                        <th>Precio T</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    @for (item of carShopt; track item.id; let id = $index) {
-                        
-                        <tr>
-                            <td>{{item.id}}</td>
-                            <td>{{item.type}}</td>
-                            <td>{{item.size}}</td>
-                            <td>{{item.price}}</td>
-                            <td>{{item.amount}}
-                            <button (click)="incremenetShopinCart(id)">+</button>
-                            <button (click)="decrementShopinCart(id)">-</button>
-                            </td>
-                            <td>{{item.total}}</td>
-                            
-                        </tr>
-                        
-                    }@empty {
-                        
-                    }
-                    
-                    
-                    
-                </tbody>
-            </table>
-        }
-        
-         
-</div>
-<div>
-    <h2>{{Total}}</h2>
-</div>
-<button (click)="sendShoppingNow()">shopping now</button>
-}
- -->
-
-
-
-<!-- 
-@if(shoppingNow){
-
-    
-    <button (click)="generateBill()">generate bill</button>
-    
-    
-    <app-findperson [items]="this.itemsFhater" (newItemEvent)="addItem($event)"></app-findperson>
-    
-} -->
 <div class="main">
-<h1>h1</h1>
-  <nav>
-    <ul class="bar-nav">
-        <li>1</li>
-        <li>2</li>
-        <li>
-            <div class="container-car-shop" (click)="showCarShopping()">
-                <p>Car-shop</p>
-            </div>
-        </li>
-    </ul>
+    <h1>h1</h1>
+    <nav>
+        <ul class="bar-nav">
+            <li>1</li>
+            <li>2</li>
+            <li>
+                <div class="container-car-shop" (click)="showCarShopping()">
+                    <p>Car-shop</p>
+                </div>
+            </li>
+        </ul>
   </nav>
+  
+  
+  <h2>nuevo componente</h2>
+  
+  <app-loadproducts></app-loadproducts>
 
+    <label>
+        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option1">
+       Search Customer
+      </label>
+      
+      <label>
+        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option2">
+        Create Customer
+      </label>
+
+
+      @if(this.selectedOption == "option1"){
+          <p>varlo 1</p>
+          <div>
+            <app-formfindperson></app-formfindperson>
+        </div>
+        }@else if(this.selectedOption=="option2"){
+        <p>varlo 2</p>
+        <app-createcustomer></app-createcustomer>
+      }@else {
+
+      }
+      
     
-    <h2>nuevo componente</h2>
+    <!-- <app-loadproducts></app-loadproducts>
+
+    <button (click)="showCreateBill()">Create Bill</button> -->
+  <!--   <button (click)="showCreateBill()">Create Bill</button>
+    @if(this.showFindPerson){
+
+        <div>
+            <app-formfindperson></app-formfindperson>
+        </div>
+    }@else {
+       
+
+    } -->
     
-    <app-loadproducts></app-loadproducts>
+
 
     <div [ngClass]="{'active': isActive, 'disabled':!isActive }">
         <button (click)="showCarShopping()">X</button>
         <app-carshopping></app-carshopping>
     </div>
     
-    <div>
-        <app-formfindperson></app-formfindperson>
-    </div>
+
+</div>
 
 
+<app-buy></app-buy>

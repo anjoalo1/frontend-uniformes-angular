@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { getCookie, removeCookie, setCookie } from 'typescript-cookie'
+//import * as jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +21,28 @@ export class TokenService {
   }
 
   public getToken(): string {
+
+
+
+
+
     const token = getCookie("token");
     if (token === undefined) {
         // Manejar el caso en el que la cookie no está presente
         const miValor:string= "false"
         return miValor;
     }
-    return token;
+
+    const verifyToken = this.isLoggedIn();
+    if(verifyToken==true){
+
+      return token;
+    }else{
+      const miValor:string= "false"
+        return miValor;
+    }
+
+    
     
   }
 
@@ -41,5 +59,30 @@ export class TokenService {
   public deleteToken():void{
     removeCookie("token");
     console.log("cookier removida")
+  }
+
+
+  isLoggedIn():boolean {
+    const token = getCookie("token"); // Suponiendo que el token está almacenado en localStorage
+
+   
+    if (!token || token==undefined)  {
+      return false;
+    }
+
+    let decodedToken = jwtDecode(token);
+
+
+    if (decodedToken?.exp) {
+      // Acceder a decodedToken.exp de forma segura
+      const expirationDate = new Date(decodedToken.exp * 1000);
+      const now = new Date();
+      //return expirationDate.getTime() > now.getTime();
+      // ...
+      return true
+    } else {
+      console.error('Token inválido o sin propiedad exp');
+    }
+     return false;
   }
 }

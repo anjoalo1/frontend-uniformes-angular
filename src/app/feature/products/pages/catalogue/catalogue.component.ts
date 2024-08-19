@@ -9,13 +9,16 @@ import { LoadproductsComponent } from "../loadproducts/loadproducts.component";
 import { CarshoppingComponent } from "../carshopping/carshopping.component";
 import { CommonModule } from '@angular/common';
 import { FormfindpersonComponent } from "../../../persons/formfindperson/formfindperson.component";
+import { FormsModule } from '@angular/forms';
+import { CreatecustomerComponent } from "../../../persons/createcustomer/createcustomer.component";
+import { BuyComponent } from "../buy/buy.component";
 
 
 @Component({
   selector: 'app-catalogue',
   standalone: true,
   providers:[SendtokenserviceService, RouterModule, TokenService],
-  imports: [FindpersonComponent, LoadproductsComponent, CarshoppingComponent, CommonModule, FormfindpersonComponent],
+  imports: [FindpersonComponent, LoadproductsComponent, CarshoppingComponent, CommonModule, FormfindpersonComponent, FormsModule, CreatecustomerComponent, BuyComponent],
   templateUrl: './catalogue.component.html',
   styleUrl: './catalogue.component.css'
 })
@@ -23,35 +26,21 @@ export default class CatalogueComponent implements OnInit{
 
 
 
- /*  myProducts:any[]=[]; */
+
   carShopt:any[]=[];
   Total: number=0;
-  /* shoppingNow:boolean=false;
-  carShoptSendBD: any[]=[];
-  itemsFhater:any={}; */
+  showFindPerson:boolean=false;
   isActive: boolean = false; // Inicialmente activo
+  selectedOption:string="";
   constructor(private catalogue:SendtokenserviceService, private tokenDelete: TokenService, private router: Router){
     
   }
-  
+
+
   ngOnInit(): void {
     this.isActive=false;
-  /*   this.catalogue.sendHeader().subscribe({
-        next:(res)=>{
-          const  addAmount = res.map((d:any)=>({...d, amount:1, total:0}));
-          this.myProducts=[...addAmount];
-        },
-        error:(status)=>{
-          console.log("status", status);
-          console.log("status", status.status);
-          if(status.status==401){
-            this.tokenDelete.deleteToken();
-            this.router.navigate(['/login'])
-            //console.log("el error es 401")
-          }
-          
-        } 
-    }) */
+    this.showFindPerson= false;
+    this.selectedOption="";
   }
 
   sumarTotal(){
@@ -63,116 +52,14 @@ export default class CatalogueComponent implements OnInit{
     this.Total = sumaPrecios;
   }
   
-  showCarShopping(){
-    console.log("sho car shopin now");
+  showCarShopping():void{
+
+      console.log("sho car shopin now");
       this.isActive = !this.isActive; // Cambia el valor de isActive 
   }
-  
-  /* addCartBuy(itemId:number, amount:number){
-      console.log(itemId);
-      const findDuplicity =  this.carShopt.find((pro)=>pro.id===itemId);
-      
-      if(findDuplicity !== undefined){
 
-        let cantidad = 0;
-        let total =0;
 
-        let duplicy = {...findDuplicity};
-        cantidad = duplicy.amount + amount;
-        duplicy.amount = cantidad;
-        total = duplicy.amount * duplicy.price;
-        duplicy.total = total;
-        let myNewArray = this.carShopt.filter(objeto=>objeto.id !== itemId)
-        this.carShopt=[...myNewArray];
-        this.carShopt.push(duplicy);
-        this.sumarTotal();
-        console.log(this.Total);
-        
-      }else{
-        const productAdd={...this.myProducts.find((pro)=>pro.id===itemId)};
-        productAdd.total = productAdd.amount * productAdd.price;
-        this.carShopt.push(productAdd);
-        this.sumarTotal();
-        console.log(this.Total);
-     }
-  } */
-/* 
-  increment(amount:number, itemId:number,idx:number){
-
-    this.myProducts[idx].amount +=1;
+  showCreateBill():void{
+      this.showFindPerson = true;
   }
-
-  decrement(amount:number, itemId:number,idx:number){
-    if(this.myProducts[idx].amount<=0){
-      
-    }else this.myProducts[idx].amount -=1;
-  }
-
-  incremenetShopinCart(id:number):void{
-    if(this.carShopt[id].amount<=0)return
-    else {
-      this.carShopt[id].amount+=1;
-      this.carShopt[id].total = this.carShopt[id].amount * this.carShopt[id].price;
-    }
-    this.sumarTotal();
-  } */
-
-/*   decrementShopinCart(id:number):void{
-    if(this.carShopt[id].amount<=1)return
-    else {
-      this.carShopt[id].amount-=1;
-      this.carShopt[id].total = this.carShopt[id].amount * this.carShopt[id].price;
-    }
-    this.sumarTotal();
-  }
- */
-
-
-  /* 
-  sendShoppingNow():void{
-
-    if(this.carShopt.length<=0){
-      
-    }else{
-
-      console.log("shoppingNow");
-      this.shoppingNow=true;
-      console.log(this.carShopt);
-  
-      let formatCarShop  = this.carShopt.map(({id, description, nameProduct, size, type, ...rest})=>({idProduct:id, ...rest}));
-      console.log(formatCarShop);
-      let addDateId = formatCarShop.map((d:any)=>({...d, }))
-  
-      this.itemsFhater = {
-        data: formatCarShop
-      }
-      this.carShoptSendBD =[...formatCarShop];
-    }
-  } */
-
-/*   generateBill(){
-    let fechaISO: string = new Date().toISOString();
-    console.log(fechaISO);
-
-// Imprimir la fecha actual
-    let myBody ={
-      id:fechaISO,
-      dateBill:fechaISO,
-      customerId:16
-    }
-
-    this.catalogue.sendPostBill(myBody);
-  }
- */
-
-
-
-
-
-  /* catalogue new */
-
-
-  // Función para alternar el estado de isActive
-  
-
 }
