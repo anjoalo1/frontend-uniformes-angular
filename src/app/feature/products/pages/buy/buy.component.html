@@ -1,0 +1,26 @@
+<p>buy works!</p>
+
+
+<button (click)="removeData()">click</button>
+<table class="table">
+    <caption>Details Products</caption>
+    <thead>
+    <tr>
+        <th>idProduct</th>
+        <th>Price P</th>
+        <th>Amount</th>
+        <th>Total T</th>
+        <!-- <th>Ad</th> -->
+    </tr>
+    </thead>
+    <tbody>
+    @for (item of this.addBillId; track $index) {
+    <tr>
+        <td>{{ item.idProduct }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.amount }}</td>
+        <td>{{ item.total }}</td>
+    </tr>
+    }@empty { }
+    </tbody>
+</table>

@@ -22,7 +22,6 @@ export const routes: Routes = [
         loadComponent: ()=>import('./feature/products/pages/catalogue/catalogue.component'),
     },
 
-
     {
         path:'',
         redirectTo:'home',

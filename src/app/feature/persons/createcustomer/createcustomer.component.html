@@ -26,7 +26,7 @@
       <input type="text" name="cellPhoneInput" formControlName="cellPhone" />
     </div>
   
-    <button (click)="createCustomer()">Crear usuario</button>
+    <button (click)="createCustomer()" [disabled]="this.shoppinCar.length<=0">Crear usuario</button>
     <h2>{{this.errorCreateCustomer}}</h2>
 
   </form>
@@ -95,7 +95,7 @@
     <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
       <h2>Esta seguro de realizar esta compra?</h2>
       <div class="button-buy">
-          <button (click)="saveBillBD(customerId)">
+          <button (click)="saveBillBD(customerId)" [disabled]="this.shoppinCar.length<=0">
           Generate Bill with is user?
           </button>
 

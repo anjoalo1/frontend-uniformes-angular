@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CreatecustomerService } from '../../../core/services/customer/createcustomer.service';
 import { FindcustomerService } from '../../../core/services/find/findcustomer.service';
 import { CreateiBllService } from '../../../core/services/bill/createBill.service';
 import { BillDetailsService } from '../../../core/services/bill_details/bill-details.service';
+import { CarshopService } from '../../../core/services/carshop/carshop.service';
 
 @Component({
   selector: 'app-createcustomer',
@@ -14,11 +15,13 @@ import { BillDetailsService } from '../../../core/services/bill_details/bill-det
   templateUrl: './createcustomer.component.html',
   styleUrl: './createcustomer.component.css'
 })
-export class CreatecustomerComponent {
+export class CreatecustomerComponent implements OnInit {
 
 
-  @Input() items: any;
-  @Input() shoppinCar: any[]=[];
+  items: any;
+  shoppinCar: any[]=[];
+
+  private carshopService = inject(CarshopService);
 
   constructor(private fb: FormBuilder, private createCustomerService: CreatecustomerService, private findCustomerService: FindcustomerService,
     private createBill: CreateiBllService, private createBillDetails: BillDetailsService
@@ -33,6 +36,17 @@ export class CreatecustomerComponent {
       isActive: ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
   
   });
+  }
+  ngOnInit(): void {
+    this.shoppinCar= this.carshopService.getItems();
+
+  /*   this.itemService.items.subscribe(updatedItems => {
+      this.items = updatedItems; // Actualizar el arreglo local
+    }); */
+
+    this.carshopService.items.subscribe(updateItems=>{
+      this.shoppinCar = updateItems;
+    })
   }
 
 
@@ -123,8 +137,9 @@ export class CreatecustomerComponent {
           },
           complete:()=>{
             console.log("petition complete create bill");
+            this.shoppinCar= this.carshopService.getItems();
             const copyItems  =[...this.shoppinCar];
-            const  addBillId = copyItems.map((d:any)=>({...d, id:null,billId:bill.id}));
+            const  addBillId = copyItems.map((d:any)=>({...d,billId:bill.id}));
             let myDataShop:any = {};
             myDataShop.items = addBillId;
             this.createBillDetails.createBillDetails(addBillId).subscribe({

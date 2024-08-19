@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FindcustomerService } from '../../../core/services/find/findcustomer.service';
 import { CreateiBllService } from '../../../core/services/bill/createBill.service';
 import { BillDetailsService } from '../../../core/services/bill_details/bill-details.service';
+import { CarshopService } from '../../../core/services/carshop/carshop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formfindperson',
@@ -13,9 +15,9 @@ import { BillDetailsService } from '../../../core/services/bill_details/bill-det
   templateUrl: './formfindperson.component.html',
   styleUrl: './formfindperson.component.css'
 })
-export class FormfindpersonComponent {
+export class FormfindpersonComponent implements OnInit{
 
-  @Input() shoppinCar: any[]=[];
+  shoppinCar: any[]=[];
 
   /*[shoppinCar]="variable_padre"*/
 
@@ -26,14 +28,22 @@ export class FormfindpersonComponent {
   customerId:number=0;
   aplicarEstilo1: boolean = true;
   completeBuySave:boolean = false;
+
+  private carshopService = inject(CarshopService);
   
 
   constructor(private fb2: FormBuilder,private findCustomerService: FindcustomerService,
-     private createBill:CreateiBllService, private createBillDetails: BillDetailsService){
+     private createBill:CreateiBllService, private createBillDetails: BillDetailsService,
+     private router: Router){
 
     this.findCustomer = this.fb2.group({
       cardId:['', [Validators.required]]
     });  
+  }
+  ngOnInit(): void {
+    this.carshopService.items.subscribe(updateItems=>{
+      this.shoppinCar = updateItems;
+    })
   }
 
 
@@ -51,6 +61,11 @@ export class FormfindpersonComponent {
           this.messageCustomerNotFound="Customer Found!"
           this.booleanCustomerFound=true;
           this.customerId = res.body.cardId;
+          this.carshopService.items.subscribe(datos=>{
+            console.log(datos);
+            this.shoppinCar = datos;
+            /* this.sumarTotal(); */
+          })
         },
         error:(error)=>{console.log(error);
           this.messageCustomerNotFound="Customer not found";
@@ -106,4 +121,29 @@ export class FormfindpersonComponent {
     });
   }
 
+
+
+  /* returns  */
+
+  returnCatalogue():void{
+    console.log("return catalogue");
+    this.changeModal();
+    this.completeBuySave = false;
+    this.carshopService.clearItems();
+    this.messageCustomerNotFound="";
+    this.booleanCustomerFound=false;
+    this.detailsCustomer=[];
+    this.router.navigate(['/catalogue']);
+  }
+  
+  returnHome():void{
+    console.log("return hombe");
+    this.changeModal();
+    this.completeBuySave = false;
+    this.carshopService.clearItems();
+    this.detailsCustomer=[];
+    this.messageCustomerNotFound="";
+    this.booleanCustomerFound=false;
+    this.router.navigate(['/home']);
+  }
 }

@@ -1,22 +1,3 @@
-<button type="button" (click)="addNewItem(this.backCatalogue)">
-    Exit buy
-    </button>
-
-<div class="form-user">
-  <p>Buscar cliente?</p>
-  <label>
-    <input [(ngModel)]="selectOption" type="radio" name="color" value="true" />
-    Buscar cliente
-  </label>
-  <label>
-    <input [(ngModel)]="selectOption" type="radio" name="color" value="false" />
-    crear cliente
-  </label>
-  <p>{{ selectOption }}</p>
-</div>
-
-@if(selectOption=="true"){
-
 <form [formGroup]="findCustomer" class="form-user">
   <label for="cardIdInputFind">cardId</label>
   <input
@@ -25,18 +6,19 @@
     formControlName="cardId"
     placeholder="Insert your card id"
   />
-  <button (click)="findCustomerForm()" class="search-customer">Find</button>
+  <button (click)="findCustomerButton()" class="search-customer">Find</button>
 </form>
 
-<h2>{{ userNotFund }}</h2>
 
-} @if (userNotFoundBoolean==true) {
 
-<table class="table">
+
+<p>{{ this.userNotFund }}</p>
+@if(this.userNotFund == "User find"){
+  <table class="table">
     <caption>Detals Customer</caption>
   <thead>
     <tr>
-      <th>CARD ID</th>
+      <th>ID</th>
       <th>NAME</th>
       <th>EMAIL</th>
       <th>CELL PHONE</th>
@@ -55,151 +37,7 @@
   </tbody>
 </table>
 
-<p>{{ this.customerId }}</p>
 
-<!-- <button (click)="saveBillBD(this.customerId)">Generate Bill with is user?</button> -->
-<!-- <button type="button" (click)="addNewItem(this.backCatalogue)">Exit buy</button> -->
-<button (click)="changeModal()">Buy</button>
+}@else {
 
-    <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
-        <div class="child-modal">
-            <h2>Esta seguro de realizar esta compra?</h2>
-            <div class="button-buy">
-                <button (click)="saveBillBD(this.customerId)">
-                Generate Bill with is user?
-                </button>
-                <button type="button" (click)="addNewItem(this.backCatalogue)">
-                Exit buy
-                </button>
-        
-                <button type="button" (click)="changeModal()">
-                    Cancel
-                    </button>
-            </div>
-        
-            <!--  <button (click)="changeModal()">changetStyle</button> -->
-            <table class="table">
-                <caption>Detals Products</caption>
-                <thead>
-                <tr>
-                    <th>idProduct</th>
-                    <th>Price P</th>
-                    <th>Amount</th>
-                    <th>Total T</th>
-                    <!-- <th>Ad</th> -->
-                </tr>
-                </thead>
-                <tbody>
-                @for (item of items.data; track $index) {
-                <tr>
-                    <td>{{ item.idProduct }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.amount }}</td>
-                    <td>{{ item.total }}</td>
-                </tr>
-                }@empty { }
-                </tbody>
-            </table>
-        </div>
-    </div>
-} @if(selectOption=="false"){
-
-<form [formGroup]="customer" class="form-customer-create">
-  <div class="div-span">
-    <span class="form-span">Create Customer</span>
-  </div>
-
-  <div class="items-form">
-    <label for="cardIdInput">cardId</label>
-    <input type="text" name="cardIdInput" formControlName="cardId" />
-    <!-- <span>{{validateField('cardId')}}</span> -->
-  </div>
-
-  <div class="items-form">
-    <label for="fullNameInput">Full Name</label>
-    <input type="text" name="fullNameInput" formControlName="fullName" />
-  </div>
-
-  <div class="items-form">
-    <label for="emaInput">Email</label>
-    <input type="email" name="emaInput" formControlName="email" />
-  </div>
-
-  <div class="items-form">
-    <label for="cellPhoneInput">Cell Phone</label>
-    <input type="text" name="cellPhoneInput" formControlName="cellPhone" />
-  </div>
-
-  <button (click)="createCustomer()">Crear usuario</button>
-  <h2>{{this.errorCreateCustomer}}</h2>
-
-  
-</form>
-
-
-@if(this.succesfullCreateCustomer==true){
-    
-  <div [ngClass]="{ estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
-    <h2>Esta seguro de realizar esta compra?</h2>
-    <div class="button-buy">
-        <button (click)="saveBillBD(this.customerId)">
-        Generate Bill with is user?
-        </button>
-        <button type="button" (click)="addNewItem(this.backCatalogue)">
-        Exit buy
-        </button>
-    </div>
-
-    <!--  <button (click)="changeModal()">changetStyle</button> -->
-    <table class="table">
-        <caption>Detals Products</caption>
-        <thead>
-        <tr>
-            <th>idProduct</th>
-            <th>Price P</th>
-            <th>Amount</th>
-            <th>Total T</th>
-            <!-- <th>Ad</th> -->
-        </tr>
-        </thead>
-        <tbody>
-        @for (item of items.data; track $index) {
-        <tr>
-            <td>{{ item.idProduct }}</td>
-            <td>{{ item.price }}</td>
-            <td>{{ item.amount }}</td>
-            <td>{{ item.total }}</td>
-        </tr>
-        }@empty { }
-        </tbody>
-    </table>
-    </div>
-
-}
-
-
-} @if(items.data.length>=1){
-    
-<table class="table">
-    <caption>Detals Products</caption>
-  <thead>
-    <tr>
-      <th>idProduct</th>
-      <th>Price P</th>
-      <th>Amount</th>
-      <th>Total T</th>
-      <!-- <th>Ad</th> -->
-    </tr>
-  </thead>
-  <tbody>
-    @for (item of items.data; track $index) {
-    <tr>
-      <td>{{ item.idProduct }}</td>
-      <td>{{ item.price }}</td>
-      <td>{{ item.amount }}</td>
-      <td>{{ item.total }}</td>
-    </tr>
-    }@empty { }
-  </tbody>
-</table>
 }

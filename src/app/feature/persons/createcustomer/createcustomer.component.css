@@ -141,7 +141,7 @@ tbody>tr:hover{
   width: 100vw;
   height: 100vh; 
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   background-color: rgba(22, 22, 69, 0.825);
   color: white;
