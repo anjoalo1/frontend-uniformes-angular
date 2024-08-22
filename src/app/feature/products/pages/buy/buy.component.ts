@@ -13,9 +13,10 @@ import { CarshopService } from '../../../../core/services/carshop/carshop.servic
 })
 export class BuyComponent implements OnInit{
 
-
+@Input() customerIdInputValue:number | undefined=0;
 
   shoppinCar:any[]=[];
+  customerCardId:number | undefined= undefined;
   private saveBill = inject(BillDetailsService);
 
   private carshopService = inject(CarshopService);
@@ -24,7 +25,13 @@ export class BuyComponent implements OnInit{
   ngOnInit(): void {
     this.carshopService.items.subscribe(updateItems=>{
       this.shoppinCar = updateItems;
+    });
+
+    this.carshopService.customer.subscribe(updateCustomer=>{
+      this.customerCardId = updateCustomer;
     })
+
+this.customerIdInputValue=0;
   }
 
 
@@ -39,7 +46,7 @@ export class BuyComponent implements OnInit{
     const customerId = 12;
     //const arrayBuy = this.buyArray.map(({}=>{}))
     let dateBill = this.formatearFechaCompleta2(new Date());
-    let bill:any = {id:dateBill, billDate:dateBill,customerId:customerId};
+    let bill:any = {id:dateBill, billDate:dateBill,customerId:this.customerCardId};
 
     console.log(bill);
 
@@ -57,7 +64,7 @@ export class BuyComponent implements OnInit{
   const fechaTemporal='2024-08-12T16:03:53.006';
 
 
- /*  const newArray1 = copyItems.map(({ description, nameProduct, size, type, ...rest }) =>({id:null, billId:fechaTemporal, ...rest })); */
+   const newArray1 = [...this.shoppinCar.map(({ description, nameProduct, size, type, ...rest }) =>({id:null, billId:fechaTemporal, ...rest }))]; 
 
 /* console.log(newArray); */
 
@@ -66,7 +73,9 @@ export class BuyComponent implements OnInit{
 
      /* this.shoppinCar = this.carshopService.update(); */
 
-    console.log("remove data", this.shoppinCar);
+    console.log("remove data", this.shoppinCar, "card id",  this.customerCardId);
+    console.log("new array", newArray1, "card id",  this.customerCardId);
+    console.log(this.carshopService.getCustomerId(), dateBill);
 
     /* this.saveBill.createBillDetails(newArray1).subscribe({
       next:(res)=>{

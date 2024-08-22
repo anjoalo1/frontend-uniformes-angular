@@ -1,7 +1,7 @@
 <p>buy works!</p>
 
 
-<button (click)="removeData()">click</button>
+<button (click)="removeData()" [disabled]="this.shoppinCar.length<=0">click</button>
 <table class="table">
     <caption>Details Products</caption>
     <thead>

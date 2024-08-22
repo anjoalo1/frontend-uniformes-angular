@@ -37,7 +37,16 @@
   </tbody>
 </table>
 
+  @if(this.detailsUser.length>=1){
+    <app-buy></app-buy>
+  }@else {
+   
+  }
 
-}@else {
+
+<!-- <app-buy  [customerIdInputValue]="this.detailsUser?.cardId></app-buy> -->
+}@else{
 
 }
+
+

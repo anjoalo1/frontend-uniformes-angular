@@ -11,6 +11,9 @@ export class CarshopService {
   private itemsSubject = new BehaviorSubject<any[]>([]);
   items = this.itemsSubject.asObservable(); // Exponer el Observable
 
+  private customerSubject = new BehaviorSubject<number | undefined>(undefined);
+  customer = this.customerSubject.asObservable();
+
 
 
   // Método para obtener el arreglo actual
@@ -27,5 +30,20 @@ export class CarshopService {
   clearItems(): void {
     this.itemsSubject.next([]); // Emitir un arreglo vacío
   }
+
+  getCustomerId():number | undefined{
+    return this.customerSubject.getValue();
+  }
+
+  addCustomerId(customerId:number):void{
+    console.log(customerId);
+    this.customerSubject.next(customerId);
+  }
+
+  clearCustomerId():void{
+    this.customerSubject.next(undefined);
+  }
+
+
 
 }

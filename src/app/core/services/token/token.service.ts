@@ -27,6 +27,8 @@ export class TokenService {
 
 
     const token = getCookie("token");
+    const verifyToken1 = this.isLoggedIn();
+    console.log("verify token", verifyToken1);
     if (token === undefined) {
         // Manejar el caso en el que la cookie no está presente
         const miValor:string= "false"
@@ -38,7 +40,9 @@ export class TokenService {
 
       return token;
     }else{
-      const miValor:string= "false"
+      const miValor:string= "false";
+      console.log("token no valido");
+      this.deleteToken();
         return miValor;
     }
 
@@ -76,8 +80,11 @@ export class TokenService {
     if (decodedToken?.exp) {
       // Acceder a decodedToken.exp de forma segura
       const expirationDate = new Date(decodedToken.exp * 1000);
+      console.log(expirationDate);
       const now = new Date();
       //return expirationDate.getTime() > now.getTime();
+
+      if(expirationDate.getTime() > now.getTime())
       // ...
       return true
     } else {
