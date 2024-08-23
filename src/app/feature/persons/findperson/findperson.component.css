@@ -1,3 +1,5 @@
+
+
 .form-user{
     display: flex;
     flex-direction: column;
@@ -83,6 +85,15 @@ h2{
 }
 
 
+
+/* estilos tabla */
+.container-table{
+  display: flex;
+  justify-content: center;
+ width: 400x;
+ margin: 0 auto;
+ overflow: auto;
+}
 
 .table {
   width: 90%;

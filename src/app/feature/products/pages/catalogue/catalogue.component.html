@@ -1,6 +1,5 @@
 
 <div class="main">
-    <h1>h1</h1>
     <nav>
         <ul class="bar-nav">
             <li>1</li>
@@ -13,9 +12,7 @@
         </ul>
   </nav>
   
-  
-  <h2>nuevo componente</h2>
-  
+
   <app-loadproducts></app-loadproducts>
 
     <label>
@@ -30,12 +27,13 @@
 
 
       @if(this.selectedOption == "option1"){
-          <p>varlo 1</p>
+          
           <div>
-            <app-formfindperson></app-formfindperson>
+           <!--  <app-formfindperson></app-formfindperson> -->
+           <app-findperson></app-findperson>
         </div>
         }@else if(this.selectedOption=="option2"){
-        <p>varlo 2</p>
+      
         <app-createcustomer></app-createcustomer>
       }@else {
 
@@ -66,6 +64,4 @@
 
 </div>
 
-<app-findperson>
-    
-</app-findperson>
+

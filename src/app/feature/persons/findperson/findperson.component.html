@@ -14,6 +14,7 @@
 
 <p>{{ this.userNotFund }}</p>
 @if(this.userNotFund == "User find"){
+ <div class="container-table">
   <table class="table">
     <caption>Detals Customer</caption>
   <thead>
@@ -36,6 +37,7 @@
     }
   </tbody>
 </table>
+ </div>
 
   @if(this.detailsUser.length>=1){
     <app-buy></app-buy>

@@ -2,25 +2,69 @@
 
 
 <button (click)="removeData()" [disabled]="this.shoppinCar.length<=0">click</button>
-<table class="table">
-    <caption>Details Products</caption>
-    <thead>
-    <tr>
-        <th>idProduct</th>
-        <th>Price P</th>
-        <th>Amount</th>
-        <th>Total T</th>
-        <!-- <th>Ad</th> -->
-    </tr>
-    </thead>
-    <tbody>
-    @for (item of this.addBillId; track $index) {
-    <tr>
-        <td>{{ item.idProduct }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.amount }}</td>
-        <td>{{ item.total }}</td>
-    </tr>
+
+
+
+@if(this.shoppinCar.length>=1){
+    
+    <div class="container-table">
+        <table class="table">
+            <caption>Details Products</caption>
+            <thead>
+                <tr>
+                    <th>idProduct</th>
+                    <th>Price P</th>
+                    <th>Amount</th>
+                    <th>Total T</th>
+                    <!-- <th>Ad</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of this.shoppinCar; track $index) {
+                    <tr>
+                        <td>{{ item.idProduct }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.total }}</td>
+            </tr>
+        }@empty { }
+            </tbody>
+    </table>
+    </div>
+}@else {
+    
+}
+
+<div [ngClass]="{estilo1: aplicarEstilo1, estilo2: !aplicarEstilo1 }">
+
+    <div>
+        <button>Buy</button>
+        <button (click)="cancelBuy()">Cancel</button>
+        <button>Exit Buy Section</button>
+    </div>
+
+
+    <table class="table">
+        <caption>Details Products</caption>
+        <thead>
+            <tr>
+                <th>idProduct</th>
+                <th>Price P</th>
+                <th>Amount</th>
+                <th>Total T</th>
+                <!-- <th>Ad</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of this.shoppinCar; track $index) {
+                <tr>
+                    <td>{{ item.idProduct }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
     }@empty { }
     </tbody>
-</table>
+    </table>
+
+</div>

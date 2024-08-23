@@ -2,9 +2,9 @@
 .bar-nav{
   display: flex;
   gap: 10px;
-  border: 1px solid black;
-  margin: 10px;
-  background-color: aquamarine;
+  /* border: 1px solid black; */
+  /* margin: 10px; */
+  background-color: rgb(50, 65, 104);
   justify-content: right;
   flex-flow: row wrap;
   text-align: center;

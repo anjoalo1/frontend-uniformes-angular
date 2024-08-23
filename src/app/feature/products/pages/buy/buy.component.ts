@@ -1,25 +1,32 @@
-import { Component, inject, Input, input, OnInit } from '@angular/core';
+import { Component, inject, Input, input, NgModule, OnDestroy, OnInit } from '@angular/core';
 import { BillDetailsService } from '../../../../core/services/bill_details/bill-details.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CarshopService } from '../../../../core/services/carshop/carshop.service';
+import { CommonModule } from '@angular/common';
+import { CreateiBllService } from '../../../../core/services/bill/createBill.service';
 
 @Component({
   selector: 'app-buy',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   providers:[BillDetailsService],
   templateUrl: './buy.component.html',
   styleUrl: './buy.component.css'
 })
-export class BuyComponent implements OnInit{
+export class BuyComponent implements OnInit, OnDestroy{
+  ngOnDestroy(): void {
+    /* throw new Error('Method not implemented.'); */
+  }
 
 @Input() customerIdInputValue:number | undefined=0;
 
   shoppinCar:any[]=[];
   customerCardId:number | undefined= undefined;
-  private saveBill = inject(BillDetailsService);
+  private createBill = inject(CreateiBllService)
+  private billDetails = inject(BillDetailsService);
 
   private carshopService = inject(CarshopService);
+   aplicarEstilo1:boolean=true;
 
 
   ngOnInit(): void {
@@ -31,7 +38,8 @@ export class BuyComponent implements OnInit{
       this.customerCardId = updateCustomer;
     })
 
-this.customerIdInputValue=0;
+  this.customerIdInputValue=0;
+  this.aplicarEstilo1 = true;
   }
 
 
@@ -40,8 +48,18 @@ this.customerIdInputValue=0;
 
   addBillId: any[]=[];
 
+  changeModal():void{
+    this.aplicarEstilo1 = false;
+  }
+
+  cancelBuy():void{
+    this.aplicarEstilo1 = true;
+  }
+
 
   removeData():void{
+
+    this.changeModal();
 
     const customerId = 12;
     //const arrayBuy = this.buyArray.map(({}=>{}))
@@ -64,7 +82,7 @@ this.customerIdInputValue=0;
   const fechaTemporal='2024-08-12T16:03:53.006';
 
 
-   const newArray1 = [...this.shoppinCar.map(({ description, nameProduct, size, type, ...rest }) =>({id:null, billId:fechaTemporal, ...rest }))]; 
+   const newArray1 = [...this.shoppinCar.map(({ description, nameProduct, size, type, ...rest }) =>({id:null, billId:dateBill, ...rest }))]; 
 
 /* console.log(newArray); */
 
@@ -84,6 +102,31 @@ this.customerIdInputValue=0;
       error:(error)=>{console.log(error)},
       complete:()=>{console.log("Saved complete")}
     }); */
+
+    this.createBill.createBill(bill).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.billDetails.createBillDetails(newArray1).subscribe({
+          next:(res)=>{
+            console.log("se complento la transaccion de guardar bill details", res);
+          },
+          error:(error)=>{
+            console.log("error al guardar bill details", error);
+          },
+          complete:()=>{
+            console.log("se completo la transaccion de bill details");
+          }
+        })
+      },
+      error:(error)=>{
+        console.log("no se pudo completar la transaccion", error)
+      },
+      complete:()=>{
+        console.log("se complento la transaccion")
+      }
+    })
+
+
   }
 
 
