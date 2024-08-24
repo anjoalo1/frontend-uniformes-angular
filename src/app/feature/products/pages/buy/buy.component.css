@@ -46,7 +46,7 @@
   }
   
   .table th {
-    background-color: #dc3a55;
+    background-color: #59c408;
     border-collapse: separate;
     word-wrap: break-word;
     padding: 10px;
@@ -63,5 +63,90 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(255, 0, 0, 0.9);
+    background: rgba(28, 30, 38, 0.887);
   }
+
+
+
+
+  /* buttons modal */
+
+  .container-button-modal{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px auto;
+  }
+
+
+  .button{
+    display: inline-block;
+    border-radius: 7px;
+    border: none;
+    background: #1875FF;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    font-size: 13px;
+    box-shadow: 0px 14px 56px -11px #1875FF;
+    width: 10em;
+    padding: 1em;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+  .button-cancel{
+    display: inline-block;
+    border-radius: 7px;
+    border: none;
+    background: #d70e0e;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    font-size: 13px;
+    box-shadow: 0px 14px 56px -11px #1875FF;
+    width: 10em;
+    padding: 1em;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+
+  
+  .button-exit{
+    display: inline-block;
+    border-radius: 7px;
+    border: none;
+    background: #8211d3;
+    color: white;
+    font-family: inherit;
+    text-align: center;
+    font-size: 13px;
+    box-shadow: 0px 14px 56px -11px #1875FF;
+    width: 10em;
+    padding: 1em;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+
+
+
+
+  /* card modal after complete buy  */
+
+
+  .card-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    min-width: 200px;
+    max-width: 300px;
+    backdrop-filter: blur(20px);
+    background: rgba(20, 21, 27, 0.698);
+    border-radius: 16px;
+    padding: 24px;
+    overflow: auto;
+    margin: 0 auto;
+    }

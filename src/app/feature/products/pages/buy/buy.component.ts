@@ -26,7 +26,8 @@ export class BuyComponent implements OnInit, OnDestroy{
   private billDetails = inject(BillDetailsService);
 
   private carshopService = inject(CarshopService);
-   aplicarEstilo1:boolean=true;
+  aplicarEstilo1:boolean=true;
+  modalBuySuccesfull:boolean= true;
 
 
   ngOnInit(): void {
@@ -40,6 +41,7 @@ export class BuyComponent implements OnInit, OnDestroy{
 
   this.customerIdInputValue=0;
   this.aplicarEstilo1 = true;
+  this.modalBuySuccesfull=true;
   }
 
 
@@ -52,14 +54,22 @@ export class BuyComponent implements OnInit, OnDestroy{
     this.aplicarEstilo1 = false;
   }
 
+  changeModalBuyComplete():void{
+    this.modalBuySuccesfull = false;
+  }
+
   cancelBuy():void{
     this.aplicarEstilo1 = true;
   }
 
 
+  showModalBuy(){
+    this.changeModal();
+  }
+
   removeData():void{
 
-    this.changeModal();
+   
 
     const customerId = 12;
     //const arrayBuy = this.buyArray.map(({}=>{}))
@@ -109,6 +119,8 @@ export class BuyComponent implements OnInit, OnDestroy{
         this.billDetails.createBillDetails(newArray1).subscribe({
           next:(res)=>{
             console.log("se complento la transaccion de guardar bill details", res);
+            this.changeModalBuyComplete();
+            
           },
           error:(error)=>{
             console.log("error al guardar bill details", error);
