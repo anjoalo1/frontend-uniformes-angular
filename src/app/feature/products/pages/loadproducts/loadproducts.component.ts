@@ -42,6 +42,8 @@ export class LoadproductsComponent implements OnInit{
         this.simpleCategory =[...this.products.map(product=>product.type).filter((type, index, self)=>self.indexOf(type)==index)]
         console.log(this.simpleCategory);
 
+        this.categoryProducts=[...this.products];
+
         /* this.products = [...this.categoryProducts]; */
       },
       error:(error)=>{

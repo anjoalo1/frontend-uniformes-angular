@@ -43,6 +43,12 @@ export default class CatalogueComponent implements OnInit{
     this.selectedOption="";
   }
 
+  changeSelectOption():void{
+    this.selectedOption="";
+    this.showFindPerson= false;
+    
+  }
+
   sumarTotal(){
     const sumaPrecios: number = this.carShopt.reduce((acumulador, producto) => {
       return acumulador + producto.total;

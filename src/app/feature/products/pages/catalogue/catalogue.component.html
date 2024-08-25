@@ -1,67 +1,103 @@
+<div class="container-catalogue">
+    
+        <nav class="nav-container">
+            <ul class="bar-nav">
+                <li>1</li>
+                <li>2</li>
+                <li>
+                    <div class="container-car-shop" (click)="showCarShopping()">
+                        <p>Car-shop</p>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="main">
+        
 
-<div class="main">
-    <nav>
-        <ul class="bar-nav">
-            <li>1</li>
-            <li>2</li>
-            <li>
-                <div class="container-car-shop" (click)="showCarShopping()">
-                    <p>Car-shop</p>
+        <app-loadproducts></app-loadproducts>
+
+        
+                <div class="option-find">
+                    <span> <label>
+                        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option1">
+                    Search Customer
+                    </label></span>
+                
+                    <span> <label>
+                        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option2">
+                        Create Customer
+                    </label></span>
                 </div>
-            </li>
-        </ul>
-  </nav>
-  
-
-  <app-loadproducts></app-loadproducts>
-
-    <label>
-        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option1">
-       Search Customer
-      </label>
-      
-      <label>
-        <input type="radio" name="options" [(ngModel)]="selectedOption" value="option2">
-        Create Customer
-      </label>
 
 
-      @if(this.selectedOption == "option1"){
-          
-          <div>
-           <!--  <app-formfindperson></app-formfindperson> -->
-           <app-findperson></app-findperson>
+            @if(this.selectedOption == "option1"){
+                
+                <div>
+                <!--  <app-formfindperson></app-formfindperson> -->
+                <app-findperson></app-findperson>
+                </div>
+                }@else if(this.selectedOption=="option2"){
+            
+                <app-createcustomer></app-createcustomer>
+            }@else {
+
+            }
+            
+            
+            <!-- <app-loadproducts></app-loadproducts>
+
+            <button (click)="showCreateBill()">Create Bill</button> -->
+        <!--   <button (click)="showCreateBill()">Create Bill</button>
+            @if(this.showFindPerson){
+
+                <div>
+                    <app-formfindperson></app-formfindperson>
+                </div>
+            }@else {
+            
+
+            } -->
+            
+
+
+            <div [ngClass]="{'active': isActive, 'disabled':!isActive }">
+                <button (click)="showCarShopping()">X</button>
+                <app-carshopping (newItemEvent)="changeSelectOption()"></app-carshopping>
+            </div>
+            
+            
         </div>
-        }@else if(this.selectedOption=="option2"){
-      
-        <app-createcustomer></app-createcustomer>
-      }@else {
 
-      }
-      
-    
-    <!-- <app-loadproducts></app-loadproducts>
-
-    <button (click)="showCreateBill()">Create Bill</button> -->
-  <!--   <button (click)="showCreateBill()">Create Bill</button>
-    @if(this.showFindPerson){
-
-        <div>
-            <app-formfindperson></app-formfindperson>
-        </div>
-    }@else {
-       
-
-    } -->
-    
-
-
-    <div [ngClass]="{'active': isActive, 'disabled':!isActive }">
-        <button (click)="showCarShopping()">X</button>
-        <app-carshopping></app-carshopping>
     </div>
     
-
-</div>
-
-
+    <footer class="container-footer">
+       
+            <div>
+                <ul>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <li>item 1</li>
+                    <li>item 2</li>
+                    <li>item 3</li>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ul>
+            </div>
+       
+    </footer>

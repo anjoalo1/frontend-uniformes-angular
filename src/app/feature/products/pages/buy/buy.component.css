@@ -59,7 +59,10 @@
 
   .estilo2{
     top: 0;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -149,4 +152,10 @@
     padding: 24px;
     overflow: auto;
     margin: 0 auto;
+    }
+
+    .message-card-buy{
+      color: red;
+      font-size: 1.5rem;
+      
     }

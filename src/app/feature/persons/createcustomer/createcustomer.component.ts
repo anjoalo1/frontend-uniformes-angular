@@ -6,6 +6,7 @@ import { FindcustomerService } from '../../../core/services/find/findcustomer.se
 import { CreateiBllService } from '../../../core/services/bill/createBill.service';
 import { BillDetailsService } from '../../../core/services/bill_details/bill-details.service';
 import { CarshopService } from '../../../core/services/carshop/carshop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createcustomer',
@@ -20,20 +21,34 @@ export class CreatecustomerComponent implements OnInit {
 
   items: any;
   shoppinCar: any[]=[];
+  customerCardId:number | undefined= undefined;
 
   private carshopService = inject(CarshopService);
+
+  router = inject(Router);
+
+  public customer: FormGroup;
+  errorCreateCustomer:string="";
+  customerId:number=0;
+  succesfullCreateCustomer:boolean=false;
+  customerCreatedData:any[]=[];
+  aplicarEstilo1: boolean = true;
+  modalBuySuccesfull:boolean= true;
+
+
+ 
 
   constructor(private fb: FormBuilder, private createCustomerService: CreatecustomerService, private findCustomerService: FindcustomerService,
     private createBill: CreateiBllService, private createBillDetails: BillDetailsService
   ){
 
     this.customer = this.fb.group({
-      cardId:['', [Validators.required, Validators.pattern('^[0-9]*$') ]],
-      fullName: ['', [Validators.required]],
+      cardId:['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(5) ]],
+      fullName: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.email]],
-      role: ['', [Validators.required]],
-      cellPhone: ['', [Validators.required]],
-      isActive: ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
+      role: [''],
+      cellPhone: ['', [Validators.required, Validators.minLength(6)]],
+      isActive: ['']
   
   });
   }
@@ -46,21 +61,39 @@ export class CreatecustomerComponent implements OnInit {
 
     this.carshopService.items.subscribe(updateItems=>{
       this.shoppinCar = updateItems;
-    })
+    });
+
+
+    this.carshopService.customer.subscribe(updateCustomer=>{
+      this.customerCardId = updateCustomer;
+    });
   }
 
 
-  public customer: FormGroup;
-  errorCreateCustomer:string="";
-  customerId:number=0;
-  succesfullCreateCustomer:boolean=false;
-  aplicarEstilo1: boolean = true;
-  customerCreatedData:any[]=[];
+  
 
 
 
 
   /* funciones */
+
+
+ 
+
+  exitBuy():void{
+    this.modalBuySuccesfull= true;
+    this.carshopService.clearCustomerId();
+    this.router.navigate(['/catalogue']); // Navegar a la misma URL
+  }
+
+  loadCatalogue():void{
+    // Recargar la misma URL
+    this.modalBuySuccesfull= true;
+     this.carshopService.clearCustomerId();
+     this.router.navigate(['/catalogue']);
+  }
+
+
 
   createCustomer():void{
 
@@ -79,6 +112,8 @@ export class CreatecustomerComponent implements OnInit {
       console.log("datos antes de guardar", this.customerId);
       this.errorCreateCustomer = `Usuario creado corectamente`;
       this.succesfullCreateCustomer=true;
+      this.carshopService.addCustomerId(res.cardId);
+      console.log(this.carshopService.getCustomerId());
       /* this.changeModal(); */
       //this.saveBillBD2(this.customerId);
     },
@@ -113,7 +148,7 @@ export class CreatecustomerComponent implements OnInit {
 
 
   changeModal(){
-    this.aplicarEstilo1 == true? this.aplicarEstilo1 = false : this.aplicarEstilo1 = true;
+    this.aplicarEstilo1 = false;
   }
 
   cancelBuy():void{
@@ -146,7 +181,13 @@ export class CreatecustomerComponent implements OnInit {
               next:(res)=>{console.log(res)},
               
               error:(error)=>{console.log(error)},
-              complete:()=>{console.log("se completo lo guardado")}
+              complete:()=>{
+                console.log("se completo lo guardado")
+                this.aplicarEstilo1 = true;
+                this.modalBuySuccesfull = false;
+                this.carshopService.clearCustomerId();
+                this.carshopService.clearItems();
+              }
               },
             );
   

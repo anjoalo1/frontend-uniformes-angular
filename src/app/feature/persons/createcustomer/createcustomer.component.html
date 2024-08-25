@@ -26,13 +26,13 @@
       <input type="text" name="cellPhoneInput" formControlName="cellPhone" />
     </div>
   
-    <button (click)="createCustomer()" [disabled]="this.shoppinCar.length<=0">Crear usuario</button>
+    <button (click)="createCustomer()" [disabled]="this.shoppinCar.length<=0 || this.customer.invalid">Crear usuario</button>
     <h2>{{this.errorCreateCustomer}}</h2>
 
   </form>
 
   @if (succesfullCreateCustomer==true) {
-    <h2>Usuario creado correctamente</h2>
+    <!-- <h2>Usuario creado correctamente</h2> -->
       
       <div class="data-customer-create">
           <table class="table">
@@ -158,3 +158,27 @@
       </div>
   
   }
+
+
+
+  <div [ngClass]="{estilo1:modalBuySuccesfull, estilo2: !modalBuySuccesfull}">
+
+    <div class="card-1">
+        <article>
+            <h2>title</h2>
+            <main>
+                <h1 class="my-h1">hola</h1>
+                    <p class="message-card-buy">The buy is complete</p>
+                    <p class="message-card-buy">you need to do another task</p>
+
+                    <button class="button" (click)="exitBuy()">Other buy</button>
+                    <button  class="button-cancel" (click)="loadCatalogue()">Exit</button>
+            </main>
+            <footer>
+                <p>my footer</p>
+            </footer>
+        </article>
+    
+    </div>
+
+</div>

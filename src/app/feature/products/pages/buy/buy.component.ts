@@ -1,15 +1,16 @@
-import { Component, inject, Input, input, NgModule, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, input, NgModule, OnDestroy, OnInit, Output } from '@angular/core';
 import { BillDetailsService } from '../../../../core/services/bill_details/bill-details.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CarshopService } from '../../../../core/services/carshop/carshop.service';
 import { CommonModule } from '@angular/common';
 import { CreateiBllService } from '../../../../core/services/bill/createBill.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-buy',
   standalone: true,
-  imports: [CommonModule],
-  providers:[BillDetailsService],
+  imports: [CommonModule, HttpClientModule],
+  providers:[BillDetailsService, CreateiBllService],
   templateUrl: './buy.component.html',
   styleUrl: './buy.component.css'
 })
@@ -18,12 +19,13 @@ export class BuyComponent implements OnInit, OnDestroy{
     /* throw new Error('Method not implemented.'); */
   }
 
-@Input() customerIdInputValue:number | undefined=0;
+  @Output() newItemEvent = new EventEmitter<string>();
 
   shoppinCar:any[]=[];
   customerCardId:number | undefined= undefined;
   private createBill = inject(CreateiBllService)
   private billDetails = inject(BillDetailsService);
+  private router = inject(Router);
 
   private carshopService = inject(CarshopService);
   aplicarEstilo1:boolean=true;
@@ -39,9 +41,15 @@ export class BuyComponent implements OnInit, OnDestroy{
       this.customerCardId = updateCustomer;
     })
 
-  this.customerIdInputValue=0;
+ 
   this.aplicarEstilo1 = true;
   this.modalBuySuccesfull=true;
+  }
+
+
+
+  addNewItem(value: string) {
+    this.newItemEvent.emit(value);
   }
 
 
@@ -63,8 +71,22 @@ export class BuyComponent implements OnInit, OnDestroy{
   }
 
 
-  showModalBuy(){
+  showModalBuy():void{
     this.changeModal();
+  }
+
+  exitBuy():void{
+    this.modalBuySuccesfull= true;
+    this.carshopService.clearCustomerId();
+    this.router.navigate(['/catalogue']); // Navegar a la misma URL
+  }
+  
+  loadCatalogue():void{
+    // Recargar la misma URL
+    this.modalBuySuccesfull= true;
+    this.addNewItem("");
+     this.carshopService.clearCustomerId();
+     this.router.navigate(['/catalogue']);
   }
 
   removeData():void{
@@ -119,6 +141,9 @@ export class BuyComponent implements OnInit, OnDestroy{
         this.billDetails.createBillDetails(newArray1).subscribe({
           next:(res)=>{
             console.log("se complento la transaccion de guardar bill details", res);
+            this.aplicarEstilo1 = true;
+            this.carshopService.clearCustomerId();
+            this.carshopService.clearItems();
             this.changeModalBuyComplete();
             
           },

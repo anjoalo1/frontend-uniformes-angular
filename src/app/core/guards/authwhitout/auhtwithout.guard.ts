@@ -6,13 +6,21 @@ export const auhtwithoutGuard: CanActivateFn = (route, state) => {
   const auhtService = inject(TokenService)
   const router = inject(Router);
 
+
+
+
+  console.log(route);
+
   if(auhtService.getToken()=="false"){
 
     return true;
   }
 
+  
+
+
+
+
   router.navigateByUrl('/catalogue');
   return false;
-
- 
 };

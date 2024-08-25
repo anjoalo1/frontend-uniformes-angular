@@ -77,10 +77,11 @@
             <h2>title</h2>
             <main>
                 <h1 class="my-h1">hola</h1>
-                    <p>Buy is Succesfull</p>
+                    <p class="message-card-buy">The buy is complete</p>
+                    <p class="message-card-buy">you need to do another task</p>
 
-                    <button class="button">Other buy</button>
-                    <button  class="button-cancel">Exit</button>
+                    <button class="button" (click)="exitBuy()">Other buy</button>
+                    <button  class="button-cancel" (click)="loadCatalogue()">Exit</button>
             </main>
             <footer>
                 <p>my footer</p>

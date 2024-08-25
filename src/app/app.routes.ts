@@ -23,6 +23,11 @@ export const routes: Routes = [
     },
 
     {
+        path:'buy',
+        loadComponent: ()=>import('./feature/products/pages/buy/buy.component').then(x=>x.BuyComponent),
+    },
+
+    {
         path:'',
         redirectTo:'home',
         pathMatch:'full'

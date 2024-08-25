@@ -17,53 +17,29 @@ import { CarshopService } from '../../../core/services/carshop/carshop.service';
   templateUrl: './findperson.component.html',
   styleUrl: './findperson.component.css'
 })
-export class FindpersonComponent {
+export class FindpersonComponent implements OnInit{
 
   
   backCatalogue:boolean=false;
   aplicarEstilo1: boolean = true;
   
-  /*  changeModal(){
-    this.aplicarEstilo1 == true? this.aplicarEstilo1 = false : this.aplicarEstilo1 = true;
-    }
-    */
-   /*   public customer: FormGroup; */
    public findCustomer : FormGroup;
    detailsUser:{cardId:number, fullName:string, email:string, cellPhone:number}[]=[];
    userNotFund:string="";
-   /* selectOption:string="";
-   userFindApi:any ={};
-   statusUserFindAPi:number=0;
-   userNotFoundBoolean:boolean=false;
-   customerId:number=0;
-   errorCreateCustomer:string="";
-   succesfullCreateCustomer:boolean=false; */
-   
-   
    searchCustomer = inject(FindcustomerService);
    private carshopService = inject(CarshopService);
    
 
-   
-   
-  constructor(/* private fb: FormBuilder,  */private fb2: FormBuilder,
-    private createBill: CreateiBllService, private createBillDetails: BillDetailsService,
-    private createCustomerService: CreatecustomerService
-  ){
+  
+  constructor(private fb2: FormBuilder, private createCustomerService: CreatecustomerService){
 
-    /*   this.customer = this.fb.group({
-        cardId:['', [Validators.required, Validators.pattern('^[0-9]*$') ]],
-        fullName: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        role: ['', [Validators.required]],
-        cellPhone: ['', [Validators.required]],
-        isActive: ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
-
-    }); */
 
     this.findCustomer = this.fb2.group({
       cardId:['', [Validators.required]]
     });       
+  }
+  ngOnInit(): void {
+    this.detailsUser = [];
   }
       
   findCustomerButton():void{
